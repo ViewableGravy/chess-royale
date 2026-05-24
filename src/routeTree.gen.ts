@@ -10,11 +10,18 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as McpRouteImport } from './routes/mcp'
+import { Route as MatchRouteRouteImport } from './routes/match/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as MatchMatchIdIndexRouteImport } from './routes/match/$matchId/index'
 
 const McpRoute = McpRouteImport.update({
   id: '/mcp',
   path: '/mcp',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MatchRouteRoute = MatchRouteRouteImport.update({
+  id: '/match',
+  path: '/match',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -22,30 +29,42 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MatchMatchIdIndexRoute = MatchMatchIdIndexRouteImport.update({
+  id: '/$matchId/',
+  path: '/$matchId/',
+  getParentRoute: () => MatchRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/match': typeof MatchRouteRouteWithChildren
   '/mcp': typeof McpRoute
+  '/match/$matchId/': typeof MatchMatchIdIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/match': typeof MatchRouteRouteWithChildren
   '/mcp': typeof McpRoute
+  '/match/$matchId': typeof MatchMatchIdIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/match': typeof MatchRouteRouteWithChildren
   '/mcp': typeof McpRoute
+  '/match/$matchId/': typeof MatchMatchIdIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/mcp'
+  fullPaths: '/' | '/match' | '/mcp' | '/match/$matchId/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/mcp'
-  id: '__root__' | '/' | '/mcp'
+  to: '/' | '/match' | '/mcp' | '/match/$matchId'
+  id: '__root__' | '/' | '/match' | '/mcp' | '/match/$matchId/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  MatchRouteRoute: typeof MatchRouteRouteWithChildren
   McpRoute: typeof McpRoute
 }
 
@@ -58,6 +77,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof McpRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/match': {
+      id: '/match'
+      path: '/match'
+      fullPath: '/match'
+      preLoaderRoute: typeof MatchRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -65,11 +91,31 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/match/$matchId/': {
+      id: '/match/$matchId/'
+      path: '/$matchId'
+      fullPath: '/match/$matchId/'
+      preLoaderRoute: typeof MatchMatchIdIndexRouteImport
+      parentRoute: typeof MatchRouteRoute
+    }
   }
 }
 
+interface MatchRouteRouteChildren {
+  MatchMatchIdIndexRoute: typeof MatchMatchIdIndexRoute
+}
+
+const MatchRouteRouteChildren: MatchRouteRouteChildren = {
+  MatchMatchIdIndexRoute: MatchMatchIdIndexRoute,
+}
+
+const MatchRouteRouteWithChildren = MatchRouteRoute._addFileChildren(
+  MatchRouteRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  MatchRouteRoute: MatchRouteRouteWithChildren,
   McpRoute: McpRoute,
 }
 export const routeTree = rootRouteImport
