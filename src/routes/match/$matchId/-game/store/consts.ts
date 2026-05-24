@@ -7,6 +7,7 @@ export type DataId = Tagged<string, 'DataId'>;
 export type Attributes = {
   x: number;
   y: number;
+	color: string;
 }
 export type Data = { id: DataId; chunkId: ChunkId; attributes: Attributes };
 export type Chunk = { id: ChunkId; data: Map<DataId, Data> };

@@ -12,8 +12,7 @@ export function DataRenderer() {
   return (
     <mesh position={[data.attributes.x ?? 1, data.attributes.y ?? 1, 1]} rotation={[0.4, 0.4, 0]}>
       <boxGeometry args={[0.5, 0.5, 0.5]} />
-      <meshBasicMaterial color="#c52222" />
+      <meshBasicMaterial color={data.attributes.color} />
     </mesh>
   );
 }
-
