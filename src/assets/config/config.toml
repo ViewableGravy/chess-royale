@@ -8,6 +8,7 @@ squareDepth = 0.05
 [piece]
 size = 0.5
 hoverColor = "#22c55e"
+moveHighlightColor = "#4ade80"
 labelFontSize = 0.28
 
 [camera]

@@ -15,6 +15,7 @@ const gameConfigSchema = z.object({
 	piece: z.object({
 		size: z.number().positive(),
 		hoverColor: z.string(),
+		moveHighlightColor: z.string(),
 		labelFontSize: z.number().positive(),
 	}),
 	camera: z.object({
