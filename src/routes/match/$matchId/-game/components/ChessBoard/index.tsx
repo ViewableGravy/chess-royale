@@ -1,10 +1,10 @@
+import type React from "react";
 import {
 	DARK_SQUARE_COLOR,
 	DEFAULT_BOARD_SIZE,
 	DEFAULT_SQUARE_SIZE,
 	LIGHT_SQUARE_COLOR,
 } from "#/routes/match/$matchId/-game/components/ChessBoard/consts.ts";
-import type React from "react";
 
 type Square = {
 	key: string;
