@@ -1,37 +1,164 @@
 {
-	"chunkId": "board-pieces",
-	"pieces": [
-		{ "id": "white-r-1", "x": 1, "y": 0, "color": "#e2e8f0", "piece": "R" },
-		{ "id": "white-n-1", "x": 2, "y": 0, "color": "#e2e8f0", "piece": "N" },
-		{ "id": "white-b-1", "x": 3, "y": 0, "color": "#e2e8f0", "piece": "B" },
-		{ "id": "white-q", "x": 4, "y": 0, "color": "#e2e8f0", "piece": "Q" },
-		{ "id": "white-k", "x": 5, "y": 0, "color": "#e2e8f0", "piece": "K" },
-		{ "id": "white-b-2", "x": 6, "y": 0, "color": "#e2e8f0", "piece": "B" },
-		{ "id": "white-n-2", "x": 7, "y": 0, "color": "#e2e8f0", "piece": "N" },
-		{ "id": "white-r-2", "x": 8, "y": 0, "color": "#e2e8f0", "piece": "R" },
-		{ "id": "white-p-1", "x": 1, "y": 1, "color": "#cbd5e1", "piece": "P" },
-		{ "id": "white-p-2", "x": 2, "y": 1, "color": "#cbd5e1", "piece": "P" },
-		{ "id": "white-p-3", "x": 3, "y": 1, "color": "#cbd5e1", "piece": "P" },
-		{ "id": "white-p-4", "x": 4, "y": 1, "color": "#cbd5e1", "piece": "P" },
-		{ "id": "white-p-5", "x": 5, "y": 1, "color": "#cbd5e1", "piece": "P" },
-		{ "id": "white-p-6", "x": 6, "y": 1, "color": "#cbd5e1", "piece": "P" },
-		{ "id": "white-p-7", "x": 7, "y": 1, "color": "#cbd5e1", "piece": "P" },
-		{ "id": "white-p-8", "x": 8, "y": 1, "color": "#cbd5e1", "piece": "P" },
-		{ "id": "black-p-1", "x": 1, "y": 8, "color": "#475569", "piece": "P" },
-		{ "id": "black-p-2", "x": 2, "y": 8, "color": "#475569", "piece": "P" },
-		{ "id": "black-p-3", "x": 3, "y": 8, "color": "#475569", "piece": "P" },
-		{ "id": "black-p-4", "x": 4, "y": 8, "color": "#475569", "piece": "P" },
-		{ "id": "black-p-5", "x": 5, "y": 8, "color": "#475569", "piece": "P" },
-		{ "id": "black-p-6", "x": 6, "y": 8, "color": "#475569", "piece": "P" },
-		{ "id": "black-p-7", "x": 7, "y": 8, "color": "#475569", "piece": "P" },
-		{ "id": "black-p-8", "x": 8, "y": 8, "color": "#475569", "piece": "P" },
-		{ "id": "black-r-1", "x": 1, "y": 9, "color": "#1e293b", "piece": "R" },
-		{ "id": "black-n-1", "x": 2, "y": 9, "color": "#1e293b", "piece": "N" },
-		{ "id": "black-b-1", "x": 3, "y": 9, "color": "#1e293b", "piece": "B" },
-		{ "id": "black-q", "x": 4, "y": 9, "color": "#1e293b", "piece": "Q" },
-		{ "id": "black-k", "x": 5, "y": 9, "color": "#1e293b", "piece": "K" },
-		{ "id": "black-b-2", "x": 6, "y": 9, "color": "#1e293b", "piece": "B" },
-		{ "id": "black-n-2", "x": 7, "y": 9, "color": "#1e293b", "piece": "N" },
-		{ "id": "black-r-2", "x": 8, "y": 9, "color": "#1e293b", "piece": "R" }
-	]
+	"board-pieces": {
+		"white-r-1": {
+			"id": "white-r-1",
+			"chunkId": "board-pieces",
+			"attributes": { "x": 1, "y": 0, "color": "#e2e8f0", "piece": "R" }
+		},
+		"white-n-1": {
+			"id": "white-n-1",
+			"chunkId": "board-pieces",
+			"attributes": { "x": 2, "y": 0, "color": "#e2e8f0", "piece": "N" }
+		},
+		"white-b-1": {
+			"id": "white-b-1",
+			"chunkId": "board-pieces",
+			"attributes": { "x": 3, "y": 0, "color": "#e2e8f0", "piece": "B" }
+		},
+		"white-q": {
+			"id": "white-q",
+			"chunkId": "board-pieces",
+			"attributes": { "x": 4, "y": 0, "color": "#e2e8f0", "piece": "Q" }
+		},
+		"white-k": {
+			"id": "white-k",
+			"chunkId": "board-pieces",
+			"attributes": { "x": 5, "y": 0, "color": "#e2e8f0", "piece": "K" }
+		},
+		"white-b-2": {
+			"id": "white-b-2",
+			"chunkId": "board-pieces",
+			"attributes": { "x": 6, "y": 0, "color": "#e2e8f0", "piece": "B" }
+		},
+		"white-n-2": {
+			"id": "white-n-2",
+			"chunkId": "board-pieces",
+			"attributes": { "x": 7, "y": 0, "color": "#e2e8f0", "piece": "N" }
+		},
+		"white-r-2": {
+			"id": "white-r-2",
+			"chunkId": "board-pieces",
+			"attributes": { "x": 8, "y": 0, "color": "#e2e8f0", "piece": "R" }
+		},
+		"white-p-1": {
+			"id": "white-p-1",
+			"chunkId": "board-pieces",
+			"attributes": { "x": 1, "y": 1, "color": "#cbd5e1", "piece": "P" }
+		},
+		"white-p-2": {
+			"id": "white-p-2",
+			"chunkId": "board-pieces",
+			"attributes": { "x": 2, "y": 1, "color": "#cbd5e1", "piece": "P" }
+		},
+		"white-p-3": {
+			"id": "white-p-3",
+			"chunkId": "board-pieces",
+			"attributes": { "x": 3, "y": 1, "color": "#cbd5e1", "piece": "P" }
+		},
+		"white-p-4": {
+			"id": "white-p-4",
+			"chunkId": "board-pieces",
+			"attributes": { "x": 4, "y": 1, "color": "#cbd5e1", "piece": "P" }
+		},
+		"white-p-5": {
+			"id": "white-p-5",
+			"chunkId": "board-pieces",
+			"attributes": { "x": 5, "y": 1, "color": "#cbd5e1", "piece": "P" }
+		},
+		"white-p-6": {
+			"id": "white-p-6",
+			"chunkId": "board-pieces",
+			"attributes": { "x": 6, "y": 1, "color": "#cbd5e1", "piece": "P" }
+		},
+		"white-p-7": {
+			"id": "white-p-7",
+			"chunkId": "board-pieces",
+			"attributes": { "x": 7, "y": 1, "color": "#cbd5e1", "piece": "P" }
+		},
+		"white-p-8": {
+			"id": "white-p-8",
+			"chunkId": "board-pieces",
+			"attributes": { "x": 8, "y": 1, "color": "#cbd5e1", "piece": "P" }
+		},
+		"black-p-1": {
+			"id": "black-p-1",
+			"chunkId": "board-pieces",
+			"attributes": { "x": 1, "y": 8, "color": "#475569", "piece": "P" }
+		},
+		"black-p-2": {
+			"id": "black-p-2",
+			"chunkId": "board-pieces",
+			"attributes": { "x": 2, "y": 8, "color": "#475569", "piece": "P" }
+		},
+		"black-p-3": {
+			"id": "black-p-3",
+			"chunkId": "board-pieces",
+			"attributes": { "x": 3, "y": 8, "color": "#475569", "piece": "P" }
+		},
+		"black-p-4": {
+			"id": "black-p-4",
+			"chunkId": "board-pieces",
+			"attributes": { "x": 4, "y": 8, "color": "#475569", "piece": "P" }
+		},
+		"black-p-5": {
+			"id": "black-p-5",
+			"chunkId": "board-pieces",
+			"attributes": { "x": 5, "y": 8, "color": "#475569", "piece": "P" }
+		},
+		"black-p-6": {
+			"id": "black-p-6",
+			"chunkId": "board-pieces",
+			"attributes": { "x": 6, "y": 8, "color": "#475569", "piece": "P" }
+		},
+		"black-p-7": {
+			"id": "black-p-7",
+			"chunkId": "board-pieces",
+			"attributes": { "x": 7, "y": 8, "color": "#475569", "piece": "P" }
+		},
+		"black-p-8": {
+			"id": "black-p-8",
+			"chunkId": "board-pieces",
+			"attributes": { "x": 8, "y": 8, "color": "#475569", "piece": "P" }
+		},
+		"black-r-1": {
+			"id": "black-r-1",
+			"chunkId": "board-pieces",
+			"attributes": { "x": 1, "y": 9, "color": "#1e293b", "piece": "R" }
+		},
+		"black-n-1": {
+			"id": "black-n-1",
+			"chunkId": "board-pieces",
+			"attributes": { "x": 2, "y": 9, "color": "#1e293b", "piece": "N" }
+		},
+		"black-b-1": {
+			"id": "black-b-1",
+			"chunkId": "board-pieces",
+			"attributes": { "x": 3, "y": 9, "color": "#1e293b", "piece": "B" }
+		},
+		"black-q": {
+			"id": "black-q",
+			"chunkId": "board-pieces",
+			"attributes": { "x": 4, "y": 9, "color": "#1e293b", "piece": "Q" }
+		},
+		"black-k": {
+			"id": "black-k",
+			"chunkId": "board-pieces",
+			"attributes": { "x": 5, "y": 9, "color": "#1e293b", "piece": "K" }
+		},
+		"black-b-2": {
+			"id": "black-b-2",
+			"chunkId": "board-pieces",
+			"attributes": { "x": 6, "y": 9, "color": "#1e293b", "piece": "B" }
+		},
+		"black-n-2": {
+			"id": "black-n-2",
+			"chunkId": "board-pieces",
+			"attributes": { "x": 7, "y": 9, "color": "#1e293b", "piece": "N" }
+		},
+		"black-r-2": {
+			"id": "black-r-2",
+			"chunkId": "board-pieces",
+			"attributes": { "x": 8, "y": 9, "color": "#1e293b", "piece": "R" }
+		}
+	}
 }

@@ -1,44 +1,47 @@
+import { z } from "zod";
 import seed from "#/routes/match/$matchId/-game/components/ChessBoard/seed.json";
 import {
+	type Chunk,
 	type Chunks,
-	createChunkId,
-	createDataId,
 	type Data,
 	type DataId,
-	type PieceLetter,
+	createChunkId,
+	createDataId,
+	PIECE_LETTERS,
 } from "#/routes/match/$matchId/-game/store/consts.ts";
 
-type SeedPiece = {
-	id: string;
-	x: number;
-	y: number;
-	color: string;
-	piece: PieceLetter;
-};
+const chunkIdSchema = z.string().transform(createChunkId);
+const dataIdSchema = z.string().transform(createDataId);
 
-type SeedFile = {
-	chunkId: string;
-	pieces: SeedPiece[];
-};
+const dataSchema = z.object({
+	id: dataIdSchema,
+	chunkId: chunkIdSchema,
+	attributes: z.object({
+		x: z.number(),
+		y: z.number(),
+		color: z.string(),
+		piece: z.enum(PIECE_LETTERS),
+	}),
+});
+
+const recordToMap = <K, V>(record: Record<string, V>, createKey: (key: string) => K) =>
+	new Map(Object.entries(record).map(([key, value]) => [createKey(key), value]));
+
+const dataMapSchema = z
+	.record(z.string(), dataSchema)
+	.transform((data) => recordToMap<DataId, Data>(data, createDataId));
+
+const initialChunksSchema = z
+	.record(z.string(), dataMapSchema)
+	.transform((chunks): Chunks =>
+		new Map(
+			Object.entries(chunks).map(([chunkId, data]) => {
+				const id = createChunkId(chunkId);
+				return [id, { id, data } satisfies Chunk];
+			}),
+		),
+	);
 
 export function createInitialChunksFromSeed(): Chunks {
-	const { chunkId, pieces } = seed as SeedFile;
-	const chunk = createChunkId(chunkId);
-	const data = new Map<DataId, Data>();
-
-	for (const piece of pieces) {
-		const dataId = createDataId(piece.id);
-		data.set(dataId, {
-			id: dataId,
-			chunkId: chunk,
-			attributes: {
-				x: piece.x,
-				y: piece.y,
-				color: piece.color,
-				piece: piece.piece,
-			},
-		});
-	}
-
-	return new Map([[chunk, { id: chunk, data }]]);
+	return initialChunksSchema.parse(seed);
 }
