@@ -1,13 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { batch } from "@tanstack/react-store";
+import { loadGameConfig } from "#/assets/config/loadGameConfig.ts";
+import { GameConfigContext } from "#/routes/match/$matchId/-game/context/GameConfigContext.tsx";
+import { PIECE_LETTERS } from "#/routes/match/$matchId/-game/store/consts.ts";
 import { ChunkStore } from "#/routes/match/$matchId/-game/store/store.ts";
+import { createUtils } from "#/routes/match/$matchId/-game/utils/createUtils.ts";
 import { GameFiberNode } from "./-game";
-
-function randomHexColor() {
-	return `#${Math.floor(Math.random() * 0xffffff)
-		.toString(16)
-		.padStart(6, "0")}`;
-}
 
 /***** ROUTE START *****/
 export const Route = createFileRoute("/match/$matchId/")({
@@ -16,19 +14,21 @@ export const Route = createFileRoute("/match/$matchId/")({
 
 /***** COMPONENT START *****/
 function RouteComponent() {
+	const config = loadGameConfig();
+	const utils = createUtils(config);
+
 	const handleOnClick = () => {
 		batch(() => {
 			for (let i = 0; i < 10; i++) {
-				const rand = (min: number, max: number) =>
-					Math.random() * (max - min) + min;
-				const x = Math.round(rand(-3, 3) * 10) / 10; // snap to 0.1 grid
-				const y = Math.round(rand(-3, 3) * 10) / 10;
-
 				ChunkStore.createData({
 					attributes: {
-						x,
-						y,
-						color: randomHexColor(),
+						x: Math.floor(Math.random() * config.board.size),
+						y: Math.floor(Math.random() * config.board.size),
+						color: `#${Math.floor(Math.random() * 0xffffff)
+							.toString(16)
+							.padStart(6, "0")}`,
+						piece:
+							PIECE_LETTERS[Math.floor(Math.random() * PIECE_LETTERS.length)],
 					},
 				});
 			}
@@ -36,11 +36,13 @@ function RouteComponent() {
 	};
 
 	return (
-		<div>
-			<button type="button" onClick={handleOnClick}>
-				more!
-			</button>
-			<GameFiberNode />
-		</div>
+		<GameConfigContext value={{ config, utils }}>
+			<div>
+				<button type="button" onClick={handleOnClick}>
+					more!
+				</button>
+				<GameFiberNode />
+			</div>
+		</GameConfigContext>
 	);
 }

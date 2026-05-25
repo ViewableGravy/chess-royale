@@ -64,6 +64,32 @@ function RouteComponent() {
 - Props, if any, are typed inline on the function parameter.
 - The route export always comes first.
 
+## Route files
+
+Route files (`src/routes/**`) contain only:
+
+1. The `Route` export from `createFileRoute` (or equivalent)
+2. The route component function defined **after** that export
+
+Route components are composition-only — wire together providers, layout, and child components. Do not define additional components in the same file. Temporary or route-specific UI belongs inline in the route component, or in a separate file under the route folder (one component per file).
+
+```tsx
+export const Route = createFileRoute("/match/$matchId/")({
+	component: RouteComponent,
+});
+
+function RouteComponent() {
+	const config = loadGameConfig();
+	const utils = createUtils(config);
+
+	return (
+		<GameConfigContext value={{ config, utils }}>
+			<GameFiberNode />
+		</GameConfigContext>
+	);
+}
+```
+
 ## Do not
 
 - Use `export function ComponentName(...)` for non-route React components.

@@ -1,10 +1,5 @@
-import type React from "react";
-import {
-	DARK_SQUARE_COLOR,
-	DEFAULT_BOARD_SIZE,
-	DEFAULT_SQUARE_SIZE,
-	LIGHT_SQUARE_COLOR,
-} from "#/routes/match/$matchId/-game/components/ChessBoard/consts.ts";
+import { useInvariantContext } from "#/hooks/useInvariantContext/index.ts";
+import { GameConfigContext } from "#/routes/match/$matchId/-game/context/GameConfigContext.tsx";
 
 type Square = {
 	key: string;
@@ -12,28 +7,22 @@ type Square = {
 	position: [number, number, number];
 };
 
-type ChessBoardFlatMeshes = React.FC<{
-  size?: number;
-  squareSize?: number;
-}>;
+export const ChessBoardFlatMeshes = () => {
+	const { config, utils } = useInvariantContext(GameConfigContext);
+	const { lightSquareColor, darkSquareColor } = config.board;
 
-export const ChessBoardFlatMeshes: ChessBoardFlatMeshes = ({
-	size = DEFAULT_BOARD_SIZE,
-	squareSize = DEFAULT_SQUARE_SIZE,
-}) => {
-	const halfBoard = (size * squareSize) / 2;
 	const squares: Square[] = [];
 
-	for (let row = 0; row < size; row += 1) {
-		for (let col = 0; col < size; col += 1) {
-			const x = (col + 0.5) * squareSize - halfBoard;
-			const y = (row + 0.5) * squareSize - halfBoard;
+	for (let row = 0; row < config.board.size; row += 1) {
+		for (let col = 0; col < config.board.size; col += 1) {
+			const topLeft = utils.getSquareTopLeft(row, col);
+			const center = utils.getSquareCenterFromTopLeft(topLeft);
 			const isLight = (row + col) % 2 === 0;
 
 			squares.push({
 				key: `${row}-${col}`,
-				color: isLight ? LIGHT_SQUARE_COLOR : DARK_SQUARE_COLOR,
-				position: [x, y, 0],
+				color: isLight ? lightSquareColor : darkSquareColor,
+				position: center,
 			});
 		}
 	}
@@ -42,7 +31,13 @@ export const ChessBoardFlatMeshes: ChessBoardFlatMeshes = ({
 		<group>
 			{squares.map((square) => (
 				<mesh key={square.key} position={square.position}>
-					<boxGeometry args={[squareSize, squareSize, 0.05]} />
+					<boxGeometry
+						args={[
+							config.board.squareSize,
+							config.board.squareSize,
+							config.board.squareDepth,
+						]}
+					/>
 					<meshStandardMaterial color={square.color} />
 				</mesh>
 			))}

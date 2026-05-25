@@ -1,0 +1,26 @@
+[board]
+size = 10
+squareSize = 1
+lightSquareColor = "#f0d9b5"
+darkSquareColor = "#b58863"
+squareDepth = 0.05
+
+[piece]
+size = 0.5
+hoverColor = "#22c55e"
+labelFontSize = 0.28
+
+[camera]
+position = [0, 0, 14]
+fov = 50
+
+[canvas]
+height = 800
+background = "#0f172a"
+
+[lighting.ambient]
+intensity = 0.7
+
+[lighting.directional]
+position = [3, 5, 2]
+intensity = 1.2
