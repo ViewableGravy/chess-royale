@@ -2,6 +2,9 @@
 name: react-19-ref-callback-cleanup
 description: 'Use for React 19 ref callback patterns, replacing useEffect-style element setup with callback refs that return cleanup, React Compiler-aware memoization guidance, and StrictMode-safe teardown checks.'
 argument-hint: 'What element resource should be mounted and cleaned up via callback ref?'
+paths:
+  - "**/*.tsx"
+  - "**/*.jsx"
 ---
 
 # React 19 Ref Callback Cleanup
