@@ -32,9 +32,9 @@ When working on React (`.tsx` / `.jsx`), read and follow:
 
 - **No default exports:** Never use default exports in this repository. Always prefer named exports so imports remain explicit and easier to refactor.
 
-- **No unnecessary type assertions or casts:** Do not add `as` type assertions or non-null assertions (`!`) when TypeScript can infer the type through control flow or generics. Prefer explicit runtime checks (e.g., `const val = map.get(key); if (!val) throw`) instead of `map.get(key)!`.
+- **No unnecessary type assertions or casts:** Do not add `as` type assertions when TypeScript can infer the type through control flow or generics. Non-null assertions (`!`) are allowed only on `Map.prototype.get()` when the key is already known to exist (e.g. immediately after `map.has(key)` in the same branch). Do not use `!` elsewhere; prefer control flow, `invariant()`, or explicit checks.
 - **Never use `any`:** Avoid the `any` type entirely. If a value's type is unclear, prefer accurate union/unknown types and narrow them with type guards, or add precise type definitions rather than using `any`.
 
-- **Use `bun x`, not `bunx`:** When running packages via Bun yourself (e.g. `@tanstack/intent`, `biome`), use `bun x <package>` instead of `bunx`. `bunx` can hang in this environment. Do not edit the auto-generated TanStack Intent block above just to replace its generated `bunx` text.
+- **Use `bun x`, not `bunx`:** When running packages via Bun yourself (e.g. `@tanstack/intent`, `oxlint`), use `bun x <package>` instead of `bunx`. `bunx` can hang in this environment. Do not edit the auto-generated TanStack Intent block above just to replace its generated `bunx` text.
 
 - **React component shape:** Non-route components with props use `React.FC<{ ... }>` + `export const Name: Name = (...) => { ... }`. Prop-less components use `export const Name = () => { ... }`. Route components (`component` / `shellComponent` on a `Route` export) use `function Name()` defined **after** the route. See [`.agents/skills/react-component-format/SKILL.md`](.agents/skills/react-component-format/SKILL.md).

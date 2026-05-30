@@ -24,7 +24,6 @@
     "zod": "^4.3.6"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.4.5",
     "@rolldown/plugin-babel": "^0.2.3",
     "@tailwindcss/typography": "^0.5.16",
     "@tanstack/devtools-vite": "latest",
@@ -36,6 +35,8 @@
     "@vitejs/plugin-react": "^6.0.1",
     "babel-plugin-react-compiler": "^1.0.0",
     "jsdom": "^28.1.0",
+    "oxfmt": "latest",
+    "oxlint": "latest",
     "type-fest": "^5.6.0",
     "typescript": "^6.0.2",
     "vite": "^8.0.0",
@@ -55,10 +56,10 @@
   "private": true,
   "scripts": {
     "build": "vite build",
-    "check": "biome check",
+    "check": "oxlint . && oxfmt --check .",
     "dev": "vite dev --port 3000",
-    "format": "biome format",
-    "lint": "biome lint",
+    "format": "oxfmt --write .",
+    "lint": "oxlint .",
     "preview": "vite preview",
     "test": "vitest run"
   },

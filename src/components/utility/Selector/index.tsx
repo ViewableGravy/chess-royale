@@ -4,17 +4,21 @@ import type React from "react";
 
 /*** TYPE DEFINITIONS ***/
 type Props<TState, TSelected = TState> = {
-  store: Store<TState>;
-  selector?: (state: TState) => TSelected;
-  children: (selected: TSelected) => React.ReactNode;
-}
-
-type Selector = <TState, TSelected = TState>(props: Props<TState, TSelected>) => React.ReactNode;
+	store: Store<TState>;
+	selector?: (state: TState) => TSelected;
+	children: (selected: TSelected) => React.ReactNode;
+};
 
 /***** COMPONENT START *****/
-export const Selector: Selector = ({ store, selector, children }) => {
-  // biome-ignore lint/suspicious/noExplicitAny: cannot infer correctly with generic
-  const selected = useSelector(store, selector ?? ((state): any => state));
+export const Selector = <TState, TSelected = TState>({
+	store,
+	selector,
+	children,
+}: Props<TState, TSelected>) => {
+	const selected = useSelector(
+		store,
+		selector ?? ((state: TState) => state as unknown as TSelected),
+	);
 
-  return <>{children(selected)}</>;
-}
+	return <>{children(selected)}</>;
+};

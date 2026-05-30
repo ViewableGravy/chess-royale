@@ -9,6 +9,7 @@ import {
 } from "#/routes/match/$matchId/-game/store/consts.ts";
 import type { ChunkStoreApi } from "#/routes/match/$matchId/-game/store/store.ts";
 import { createId } from "#/utils/functions/createId";
+import invariant from "tiny-invariant";
 
 export type CreateDataInput = Omit<Data, "id" | "chunkId"> | Omit<Data, "id">;
 
@@ -44,7 +45,8 @@ export function createCreateData({ get, setState }: ChunkStoreApi) {
 						};
 						chunks.set(preferredChunk, chunk);
 					} else {
-						const chunk = chunks.get(preferredChunk)!;
+						const chunk = chunks.get(preferredChunk);
+						invariant(chunk, `Chunk with id ${preferredChunk} not found`);
 						const newChunkData = new Map(chunk.data);
 						newChunkData.set(dataId, newData);
 						const newChunk: Chunk = { ...chunk, data: newChunkData };
