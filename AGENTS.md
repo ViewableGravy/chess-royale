@@ -20,6 +20,7 @@ Project skills live in [`.agents/skills/`](.agents/skills/). Add new skills unde
 When working on React (`.tsx` / `.jsx`), read and follow:
 
 - [`.agents/skills/react-component-format/SKILL.md`](.agents/skills/react-component-format/SKILL.md) — `React.FC` + `export const`; route components use `function` after the `Route` export.
+- [`.agents/skills/react-component-sections/SKILL.md`](.agents/skills/react-component-sections/SKILL.md) — `TYPE DEFINITIONS` → `COMPONENT START` file sections; inline `state` → `render` order; snippets for each.
 - [`.agents/skills/react-compiler-memoization/SKILL.md`](.agents/skills/react-compiler-memoization/SKILL.md) — do not add `useMemo`, `useCallback`, or `memo` unless an escape hatch applies.
 - [`.agents/skills/react-context-usage/SKILL.md`](.agents/skills/react-context-usage/SKILL.md) — read contexts with `useInvariantContext` or `use`; no thin `useXContext` wrappers.
 - [`.agents/skills/react-avoid-use-effect/SKILL.md`](.agents/skills/react-avoid-use-effect/SKILL.md) — do not use `useEffect`; ask before adding it if unavoidable.

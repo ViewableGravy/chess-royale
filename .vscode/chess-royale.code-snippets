@@ -1,0 +1,65 @@
+{
+  "comment_type_definitions": {
+    "prefix": "comment_type_definitions",
+    "body": [
+      "/**********************************************************************************************************",
+      " *   TYPE DEFINITIONS",
+      " **********************************************************************************************************/"
+    ],
+    "description": "TYPE DEFINITIONS section header"
+  },
+  "comment_component_start": {
+    "prefix": "comment_component_start",
+    "body": [
+      "/**********************************************************************************************************",
+      " *   COMPONENT START",
+      " **********************************************************************************************************/"
+    ],
+    "description": "COMPONENT START section header"
+  },
+  "comment_state": {
+    "prefix": "comment_state",
+    "body": ["/***** state *****/"],
+    "description": "Inline state section (useState, useRef, useToggle)"
+  },
+  "comment_context": {
+    "prefix": "comment_context",
+    "body": ["/***** context *****/"],
+    "description": "Inline context section"
+  },
+  "comment_hooks": {
+    "prefix": "comment_hooks",
+    "body": ["/***** hooks *****/"],
+    "description": "Inline hooks section"
+  },
+  "comment_queries": {
+    "prefix": "comment_queries",
+    "body": ["/***** queries *****/"],
+    "description": "Inline queries section"
+  },
+  "comment_form": {
+    "prefix": "comment_form",
+    "body": ["/***** form *****/"],
+    "description": "Inline form section"
+  },
+  "comment_effects": {
+    "prefix": "comment_effects",
+    "body": ["/***** effects *****/"],
+    "description": "Inline effects section"
+  },
+  "comment_functions": {
+    "prefix": "comment_functions",
+    "body": ["/***** functions *****/"],
+    "description": "Inline functions section"
+  },
+  "comment_render_helpers": {
+    "prefix": "comment_render_helpers",
+    "body": ["/***** render helpers *****/"],
+    "description": "Inline render helpers section"
+  },
+  "comment_render": {
+    "prefix": "comment_render",
+    "body": ["/***** render *****/"],
+    "description": "Inline render section"
+  }
+}
