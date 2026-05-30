@@ -19,7 +19,10 @@ export const DataRenderer = () => {
 	const [hovered, setHovered] = useState(false);
 
 	const data = useSelector(ChunkStore, (state) =>
-		ChunkStore.getData(dataId, ChunkStore.getChunk(chunkId, state)),
+		ChunkStore.actions.getData(
+			dataId,
+			ChunkStore.actions.getChunk(chunkId, state),
+		),
 	);
 
 	const occupiedSquares = useSelector(ChunkStore, (state) => {

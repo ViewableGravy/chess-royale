@@ -1,20 +1,18 @@
-import type { Store } from "@tanstack/react-store";
 import type {
 	Chunk,
 	ChunkId,
-	Chunks,
 	Data,
 } from "#/routes/match/$matchId/-game/store/consts.ts";
 import {
 	createChunkId,
 	createDataId,
 } from "#/routes/match/$matchId/-game/store/consts.ts";
-import { createGenericStoreAction } from "#/utilities/store";
+import type { ChunkStoreApi } from "#/routes/match/$matchId/-game/store/store.ts";
 import { createId } from "#/utils/functions/createId";
 
 export type CreateDataInput = Omit<Data, "id" | "chunkId"> | Omit<Data, "id">;
 
-export const createData = createGenericStoreAction((store: Store<Chunks>) => {
+export function createCreateData({ get, setState }: ChunkStoreApi) {
 	return (data: CreateDataInput, chunkIdHint?: ChunkId) => {
 		const MAX_AUTOMATIC_CHUNK_SIZE = 10;
 		const MAX_ABSOLUTE_CHUNK_SIZE = 20;
@@ -25,7 +23,7 @@ export const createData = createGenericStoreAction((store: Store<Chunks>) => {
 		}
 
 		if (preferredChunk) {
-			const chunks = store.state;
+			const chunks = get();
 			const target = chunks.get(preferredChunk);
 
 			if (target && target.data.size < MAX_ABSOLUTE_CHUNK_SIZE) {
@@ -36,7 +34,7 @@ export const createData = createGenericStoreAction((store: Store<Chunks>) => {
 					attributes: data.attributes,
 				};
 
-				store.setState((prev) => {
+				setState((prev) => {
 					const chunks = new Map(prev);
 
 					if (!chunks.has(preferredChunk)) {
@@ -61,7 +59,7 @@ export const createData = createGenericStoreAction((store: Store<Chunks>) => {
 		}
 
 		let targetChunkId: ChunkId | undefined;
-		for (const [id, chunk] of store.state.entries()) {
+		for (const [id, chunk] of get().entries()) {
 			if (chunk.data.size < MAX_AUTOMATIC_CHUNK_SIZE) {
 				targetChunkId = id;
 				break;
@@ -77,7 +75,7 @@ export const createData = createGenericStoreAction((store: Store<Chunks>) => {
 			attributes: data.attributes,
 		};
 
-		store.setState((prev) => {
+		setState((prev) => {
 			const chunks = new Map(prev);
 
 			if (!chunks.has(finalTargetChunkId)) {
@@ -99,4 +97,4 @@ export const createData = createGenericStoreAction((store: Store<Chunks>) => {
 
 		return [targetChunkId, dataId] as const;
 	};
-});
+}

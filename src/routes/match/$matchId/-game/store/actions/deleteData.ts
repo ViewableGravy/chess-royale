@@ -1,13 +1,12 @@
-import type { Store } from "@tanstack/react-store";
 import type {
 	Chunk,
-	Chunks,
 	DataId,
 } from "#/routes/match/$matchId/-game/store/consts.ts";
-import { createGenericStoreAction } from "#/utilities/store";
-export const deleteData = createGenericStoreAction((store: Store<Chunks>) => {
+import type { ChunkStoreApi } from "#/routes/match/$matchId/-game/store/store.ts";
+
+export function createDeleteData({ setState }: ChunkStoreApi) {
 	return (dataId: DataId) => {
-		store.setState((prev) => {
+		setState((prev) => {
 			const chunks = new Map(prev);
 
 			for (const [chunkId, chunk] of prev.entries()) {
@@ -29,4 +28,4 @@ export const deleteData = createGenericStoreAction((store: Store<Chunks>) => {
 			return prev;
 		});
 	};
-});
+}

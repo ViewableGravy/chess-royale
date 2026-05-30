@@ -1,13 +1,12 @@
-import type { Store } from "@tanstack/react-store";
 import type {
 	ChunkId,
 	Chunks,
 } from "#/routes/match/$matchId/-game/store/consts.ts";
-import { createGenericStoreAction } from "#/utilities/store";
+import type { ChunkStoreApi } from "#/routes/match/$matchId/-game/store/store.ts";
 
-export const getChunk = createGenericStoreAction((store: Store<Chunks>) => {
-	return (chunkId: ChunkId, chunks: Chunks) => {
-		const chunk = (chunks ?? store.state).get(chunkId);
+export function createGetChunk({ get }: ChunkStoreApi) {
+	return (chunkId: ChunkId, chunks?: Chunks) => {
+		const chunk = (chunks ?? get()).get(chunkId);
 
 		if (!chunk) {
 			throw new Error(`Chunk with id ${chunkId} not found`);
@@ -15,4 +14,4 @@ export const getChunk = createGenericStoreAction((store: Store<Chunks>) => {
 
 		return chunk;
 	};
-});
+}

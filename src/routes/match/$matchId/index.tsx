@@ -20,7 +20,7 @@ function RouteComponent() {
 	const handleOnClick = () => {
 		batch(() => {
 			for (let i = 0; i < 10; i++) {
-				ChunkStore.createData({
+				ChunkStore.actions.createData({
 					attributes: {
 						x: Math.floor(Math.random() * config.board.size),
 						y: Math.floor(Math.random() * config.board.size),

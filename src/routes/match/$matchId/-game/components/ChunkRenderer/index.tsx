@@ -10,7 +10,7 @@ import { DataRenderer } from "../DataRenderer";
 export const ChunkRenderer = () => {
 	const chunkId = useInvariantContext(ChunkIdContext);
 	const chunk = useSelector(ChunkStore, (state) =>
-		ChunkStore.getChunk(chunkId, state),
+		ChunkStore.actions.getChunk(chunkId, state),
 	);
 
 	return (
