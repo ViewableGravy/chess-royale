@@ -28,4 +28,10 @@ Before substantial work:
 
 - **React component shape:** Non-route components with props use `React.FC<{ ... }>` + `export const Name: Name = (...) => { ... }`. Prop-less components use `export const Name = () => { ... }`. Route components (`component` / `shellComponent` on a `Route` export) use `function Name()` defined **after** the route.
 
-- **R3F frame callbacks:** Do not use early returns inside `useFrame`, `useFrameAnimation` `apply` callbacks, or similar per-frame effect paths. Read the game camera via `useGameCamera()` (orthographic invariant at the hook boundary) instead of `useThree((s) => s.camera)` plus `instanceof` checks in frame logic.
+- **R3F frame callbacks:** Do not use early returns inside `useFrame`, `useFrameAnimation` `apply` callbacks, or similar per-frame effect paths. Read the game camera via `useGameCamera()` (orthographic invariant at the hook boundary) instead of `useThree((s) => s.camera)` plus `instanceof` checks in frame logic. For `useFrameAnimation`, inline the `apply` callback at the call site when it is under ~50 lines; keep `initial`, `getTarget`, and `step` separate when that reads clearer.
+
+- **Ref callbacks:** Before writing or editing any function passed to `ref`, read and follow `.agents/skills/react-19-ref-callback-cleanup/SKILL.md`. Use `(node: T) => { ...; return () => { ... }; }` with a non-null `node` — never `(node: T | null)` or `if (node == null)` for detach when returning cleanup.
+
+- **Move state down:** When hooks, refs, frame animation, or a wrapper element only serve a narrow subtree and have one or two dependencies passable as props, extract them into a child component that owns that JSX and logic. Keep the parent focused on broader coordination. Skip extraction when the same logic must wire into many scattered places in the parent's JSX.
+
+- **React `.tsx` / `.jsx` structure:** Always use TYPE DEFINITIONS → COMPONENT START file banners and inline `/***** section *****/` comments per `.cursor/rules/react-component-sections.mdc` and `.agents/skills/react-component-sections/SKILL.md`.

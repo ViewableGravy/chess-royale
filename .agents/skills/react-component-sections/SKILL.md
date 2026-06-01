@@ -1,12 +1,10 @@
 ---
 name: react-component-sections
 description: >-
-  File and inline section ordering for React components. File-level: TYPE
-  DEFINITIONS then COMPONENT START banner comments. Inside components: state,
-  context, hooks, queries, form, effects, functions, render helpers, render
-  inline comments. Use when creating or editing React components (.tsx),
-  TypeScript modules with types, or when the user asks about component file
-  structure or section comments.
+  REQUIRED for every .tsx/.jsx create or edit. File-level TYPE DEFINITIONS and
+  COMPONENT START banners; inline state/context/hooks/.../render sections.
+  Also applies to .ts modules that export types + implementation. Cursor rule:
+  .cursor/rules/react-component-sections.mdc (auto-applies on matching files).
 paths:
   - "**/*.tsx"
   - "**/*.jsx"
@@ -14,6 +12,10 @@ paths:
 ---
 
 # React Component Sections
+
+**Load and follow this skill every time** you create or edit a `.tsx` / `.jsx` file (any change — new component, props, hooks, or JSX). The project Cursor rule `.cursor/rules/react-component-sections.mdc` applies the same requirements when those files are in context.
+
+For `.ts` files that export types and functions (stores, hooks without JSX), use the same file-level banners.
 
 Component and module files follow a consistent two-section layout, separated by banner comments.
 

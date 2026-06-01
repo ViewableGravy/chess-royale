@@ -1,5 +1,6 @@
 import { useSelector } from "@tanstack/react-store";
 import { useInvariantContext } from "#/hooks/useInvariantContext/index.ts";
+import { AnimatedPieceGroup } from "#/routes/match/$matchId/-game/components/AnimatedPieceGroup/index.tsx";
 import { MoveHighlight } from "#/routes/match/$matchId/-game/components/MoveHighlight/index.tsx";
 import { PieceLabel } from "#/routes/match/$matchId/-game/components/PieceLabel/index.tsx";
 import { GameConfigContext } from "#/routes/match/$matchId/-game/context/GameConfigContext.tsx";
@@ -24,7 +25,7 @@ import { gridCoordKey } from "#/routes/match/$matchId/-game/utils/pieceMoveOffse
 export const DataRenderer = () => {
 	const chunkId = useInvariantContext(ChunkIdContext);
 	const dataId = useInvariantContext(DataIdContext);
-	const { config, utils } = useInvariantContext(GameConfigContext);
+	const { config } = useInvariantContext(GameConfigContext);
 
 	const data = useSelector(ChunkStore, (state) =>
 		ChunkStore.actions.getData(dataId, ChunkStore.actions.getChunk(chunkId, state)),
@@ -55,8 +56,6 @@ export const DataRenderer = () => {
 				removed: removedTiles,
 			})
 		: [];
-
-	const position = utils.gridCoordToWorldPosition(data.attributes.x, data.attributes.y);
 
 	const color = isSelected ? config.piece.hoverColor : data.attributes.color;
 
@@ -102,7 +101,7 @@ export const DataRenderer = () => {
 			{predictedMoves.map((move) => (
 				<MoveHighlight key={gridCoordKey(move)} x={move.x} y={move.y} />
 			))}
-			<group position={position}>
+			<AnimatedPieceGroup x={data.attributes.x} y={data.attributes.y}>
 				<mesh onClick={handleClick}>
 					<boxGeometry args={[config.piece.size, config.piece.size, config.piece.size]} />
 					<meshStandardMaterial color={color} />
@@ -112,7 +111,7 @@ export const DataRenderer = () => {
 					pieceSize={config.piece.size}
 					size={config.piece.labelFontSize * 1.4}
 				/>
-			</group>
+			</AnimatedPieceGroup>
 		</>
 	);
 };

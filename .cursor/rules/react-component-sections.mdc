@@ -1,0 +1,49 @@
+---
+description: React/JSX file structure — TYPE DEFINITIONS, COMPONENT START, and inline section comments. Required for every .tsx/.jsx change.
+globs: "**/*.{tsx,jsx}"
+alwaysApply: false
+---
+
+# React component file structure
+
+**Always follow** when creating or editing `.tsx` / `.jsx` files. Full reference: `.agents/skills/react-component-sections/SKILL.md`.
+
+## File layout
+
+1. Imports
+2. `TYPE DEFINITIONS` banner — all types/interfaces for the file
+3. `COMPONENT START` banner — component implementation (`export const Name: Name = ...`)
+
+Never put types after the component. Never interleave types and implementation.
+
+Banner format:
+
+```tsx
+/**********************************************************************************************************
+ *   TYPE DEFINITIONS
+ **********************************************************************************************************/
+```
+
+```tsx
+/**********************************************************************************************************
+ *   COMPONENT START
+ **********************************************************************************************************/
+```
+
+## Inline sections (inside the component body)
+
+Use `/***** section *****/` comments. Include a section only when it has code; keep this order when present:
+
+| Order | Section            |
+| ----- | ------------------ |
+| 1     | `state`            |
+| 2     | `context`          |
+| 3     | `hooks`            |
+| 4     | `queries`          |
+| 5     | `form`             |
+| 6     | `effects`          |
+| 7     | `functions`        |
+| 8     | `render helpers`   |
+| 9     | `render`           |
+
+Component shape: `type Name = React.FC<{...}>` in TYPE DEFINITIONS; `export const Name: Name = ...` in COMPONENT START. See `.agents/skills/react-component-format/SKILL.md` for prop-less and route exceptions.

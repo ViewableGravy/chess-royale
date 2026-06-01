@@ -1,6 +1,6 @@
 ---
 name: react-19-ref-callback-cleanup
-description: "Use for React 19 ref callback patterns, replacing useEffect-style element setup with callback refs that return cleanup, React Compiler-aware memoization guidance, and StrictMode-safe teardown checks."
+description: "REQUIRED whenever you pass a function to ref or define a ref callback. React 19 callback refs with cleanup: non-null node parameter, return teardown. Never (node: T | null) with the cleanup-return pattern."
 argument-hint: "What element resource should be mounted and cleaned up via callback ref?"
 paths:
   - "**/*.tsx"
@@ -9,7 +9,9 @@ paths:
 
 # React 19 Ref Callback Cleanup
 
-Use this skill when a component sets up imperative behavior on a DOM element (canvas roots, observers, third-party widgets, event bridges) and you want setup/teardown colocated on the element ref instead of split across `useEffect`.
+**Load and follow this skill every time** you add, edit, or review a callback passed to `ref` (including inline `ref={(node) => ...}` on DOM, R3F, or Drei elements).
+
+Use it when a component sets up imperative behavior on an element (canvas roots, Three.js objects, observers, third-party widgets, event bridges) and you want setup/teardown colocated on the ref instead of split across `useEffect`.
 
 ## When to Use
 
@@ -20,13 +22,14 @@ Use this skill when a component sets up imperative behavior on a DOM element (ca
 
 ## Key React 19 Rules
 
-1. Prefer callback refs that return cleanup:
-   - `ref={(node) => { setup(node); return () => cleanup(node) }}`
-2. When a cleanup function is returned, React uses that cleanup on detach/replacement.
-3. Backward compatibility path: if no cleanup is returned, React may call callback with `null`.
-4. React Compiler usually handles memoization automatically, so `useCallback` is optional by default.
-5. Use manual `useCallback` as an escape hatch when you need explicit identity control.
-6. In `StrictMode`, expect one extra setup+cleanup cycle in development.
+1. **Always** use callback refs that return cleanup:
+   - `ref={(node) => { setup(node); return () => cleanup(); }}`
+2. Setup callback parameter is **non-null** (`node: HTMLDivElement`, `node: Group`, etc.). React only calls setup with a real instance when you return cleanup.
+3. When a cleanup function is returned, React runs that cleanup on detach/replacement — do **not** handle detach via `if (node == null)`.
+4. In this repo, **never** type ref callbacks as `(node: T | null)` or branch on `node == null` for the main path.
+5. React Compiler usually handles memoization automatically, so `useCallback` is optional by default.
+6. Use manual `useCallback` as an escape hatch when you need explicit identity control.
+7. In `StrictMode`, expect one extra setup+cleanup cycle in development.
 
 ## Decision Flow
 
@@ -93,21 +96,19 @@ function Component() {
 }
 ```
 
-## Branch: Legacy Compatibility Needed
+## Not Allowed in This Repo
 
-If you intentionally support code that does not return cleanup yet:
+Do not use nullable ref callbacks or null branches for detach:
 
 ```tsx
+// ❌ Do not write this
 const mount = (node: HTMLDivElement | null) => {
-	if (node == null) {
-		// legacy detach path
-		return;
-	}
+	if (node == null) return;
 	setup(node);
 };
 ```
 
-Use this only as migration scaffolding. Prefer the cleanup-return pattern above.
+Use the cleanup-return pattern above instead. Legacy `null` detach calls exist only when **no** cleanup function is returned (old React behavior) — we do not use that path here.
 
 ## Quality Checklist
 
