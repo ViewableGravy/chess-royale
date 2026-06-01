@@ -5,5 +5,5 @@ import { PIECE_LETTERS, type PieceLetter } from "../consts";
  * @returns A random piece letter.
  */
 export function getRandomPieceLetter(): PieceLetter {
-  return PIECE_LETTERS[Math.floor(Math.random() * PIECE_LETTERS.length)];
+	return PIECE_LETTERS[Math.floor(Math.random() * PIECE_LETTERS.length)];
 }

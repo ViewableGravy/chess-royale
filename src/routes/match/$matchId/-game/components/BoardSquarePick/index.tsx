@@ -16,20 +16,10 @@ type BoardSquarePick = React.FC<{
 	isTarget: boolean;
 }>;
 
-export const BoardSquarePick: BoardSquarePick = ({
-	x,
-	y,
-	position,
-	isTarget,
-}) => {
+export const BoardSquarePick: BoardSquarePick = ({ x, y, position, isTarget }) => {
 	const { config } = useInvariantContext(GameConfigContext);
-	const selectedPiece = useSelector(
-		WorldStateStore,
-		(state) => state.selectedPiece,
-	);
-	const canAct = useSelector(WorldStateStore, (state) =>
-		canLocalPlayerAct(state),
-	);
+	const selectedPiece = useSelector(WorldStateStore, (state) => state.selectedPiece);
+	const canAct = useSelector(WorldStateStore, (state) => canLocalPlayerAct(state));
 
 	const handleClick = (event: { stopPropagation: () => void }) => {
 		event.stopPropagation();
@@ -47,20 +37,10 @@ export const BoardSquarePick: BoardSquarePick = ({
 
 	return (
 		<mesh
-			position={[
-				position[0],
-				position[1],
-				position[2] + config.board.squareDepth / 2 + 0.02,
-			]}
+			position={[position[0], position[1] + config.board.squareDepth / 2 + 0.02, position[2]]}
 			onClick={handleClick}
 		>
-			<boxGeometry
-				args={[
-					config.board.squareSize * 0.98,
-					config.board.squareSize * 0.98,
-					0.02,
-				]}
-			/>
+			<boxGeometry args={[config.board.squareSize * 0.98, 0.02, config.board.squareSize * 0.98]} />
 			<meshStandardMaterial
 				transparent
 				opacity={isTarget ? config.piece.moveHighlightOpacity * 0.45 : 0}

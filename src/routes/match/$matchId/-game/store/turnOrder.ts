@@ -2,12 +2,7 @@ import type { TeamId, TeamName } from "#/routes/match/$matchId/-game/store/const
 import { createTeamId } from "#/routes/match/$matchId/-game/store/createTeamId.ts";
 
 /** Round-robin turn order; south is the light ("white") side. */
-export const TURN_ORDER = [
-	"south",
-	"north",
-	"west",
-	"east",
-] as const satisfies readonly TeamName[];
+export const TURN_ORDER = ["south", "north", "west", "east"] as const satisfies readonly TeamName[];
 
 export const FIRST_TURN_TEAM_ID = createTeamId(TURN_ORDER[0]);
 

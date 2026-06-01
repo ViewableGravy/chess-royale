@@ -1,17 +1,12 @@
 import { useSelector } from "@tanstack/react-store";
 import { useInvariantContext } from "#/hooks/useInvariantContext/index.ts";
-import {
-	ChunkIdContext,
-	DataIdContext,
-} from "#/routes/match/$matchId/-game/store/context.ts";
+import { ChunkIdContext, DataIdContext } from "#/routes/match/$matchId/-game/store/context.ts";
 import { ChunkStore } from "#/routes/match/$matchId/-game/store/store.ts";
 import { DataRenderer } from "../DataRenderer";
 
 export const ChunkRenderer = () => {
 	const chunkId = useInvariantContext(ChunkIdContext);
-	const chunk = useSelector(ChunkStore, (state) =>
-		ChunkStore.actions.getChunk(chunkId, state),
-	);
+	const chunk = useSelector(ChunkStore, (state) => ChunkStore.actions.getChunk(chunkId, state));
 
 	return (
 		<>

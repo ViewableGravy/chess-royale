@@ -20,8 +20,10 @@ const gameConfigSchema = z.object({
 		labelFontSize: z.number().positive(),
 	}),
 	camera: z.object({
-		position: vec3Schema,
-		fov: z.number().positive(),
+		distance: z.number().positive(),
+		fitPadding: z.number().positive(),
+		near: z.number().positive(),
+		far: z.number().positive(),
 	}),
 	canvas: z.object({
 		height: z.number().positive(),

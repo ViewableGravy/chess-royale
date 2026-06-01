@@ -23,25 +23,11 @@ type Square = {
 export const ChessBoardFlatMeshes = () => {
 	const { config, utils } = useInvariantContext(GameConfigContext);
 	const { lightSquareColor, darkSquareColor } = config.board;
-	const closingZone = useSelector(
-		WorldStateStore,
-		(state) => state.closingZone,
-	);
-	const selectedPiece = useSelector(
-		WorldStateStore,
-		(state) => state.selectedPiece,
-	);
-	const activeTeamId = useSelector(
-		WorldStateStore,
-		(state) => state.activeTeamId,
-	);
-	const localPlayerTeamId = useSelector(
-		WorldStateStore,
-		(state) => state.localPlayerTeamId,
-	);
-	const canAct = useSelector(WorldStateStore, (state) =>
-		canLocalPlayerAct(state),
-	);
+	const closingZone = useSelector(WorldStateStore, (state) => state.closingZone);
+	const selectedPiece = useSelector(WorldStateStore, (state) => state.selectedPiece);
+	const activeTeamId = useSelector(WorldStateStore, (state) => state.activeTeamId);
+	const localPlayerTeamId = useSelector(WorldStateStore, (state) => state.localPlayerTeamId);
+	const canAct = useSelector(WorldStateStore, (state) => canLocalPlayerAct(state));
 	const legalMoveTargetKeys = useSelector(
 		ChunkStore,
 		(chunks) => {
@@ -113,11 +99,7 @@ export const ChessBoardFlatMeshes = () => {
 					<group key={square.key}>
 						<mesh position={square.position}>
 							<boxGeometry
-								args={[
-									config.board.squareSize,
-									config.board.squareSize,
-									config.board.squareDepth,
-								]}
+								args={[config.board.squareSize, config.board.squareDepth, config.board.squareSize]}
 							/>
 							<meshStandardMaterial color={square.color} />
 						</mesh>

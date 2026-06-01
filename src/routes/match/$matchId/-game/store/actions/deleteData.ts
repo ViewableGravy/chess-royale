@@ -1,7 +1,4 @@
-import type {
-	Chunk,
-	DataId,
-} from "#/routes/match/$matchId/-game/store/consts.ts";
+import type { Chunk, DataId } from "#/routes/match/$matchId/-game/store/consts.ts";
 import type { ChunkStoreApi } from "#/routes/match/$matchId/-game/store/store.ts";
 
 export function createDeleteData({ setState }: ChunkStoreApi) {

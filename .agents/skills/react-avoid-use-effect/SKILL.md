@@ -32,15 +32,15 @@ The React Compiler memoizes when dependencies are unchanged.
 
 ```tsx
 <meshBasicMaterial
-  ref={(material) => {
-    if (!material) {
-      return;
-    }
+	ref={(material) => {
+		if (!material) {
+			return;
+		}
 
-    return () => {
-      material.map?.dispose();
-    };
-  }}
+		return () => {
+			material.map?.dispose();
+		};
+	}}
 />
 ```
 

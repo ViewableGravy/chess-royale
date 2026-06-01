@@ -3,10 +3,7 @@ import { useInvariantContext } from "#/hooks/useInvariantContext/index.ts";
 import { MoveHighlight } from "#/routes/match/$matchId/-game/components/MoveHighlight/index.tsx";
 import { PieceLabel } from "#/routes/match/$matchId/-game/components/PieceLabel/index.tsx";
 import { GameConfigContext } from "#/routes/match/$matchId/-game/context/GameConfigContext.tsx";
-import {
-	ChunkIdContext,
-	DataIdContext,
-} from "#/routes/match/$matchId/-game/store/context.ts";
+import { ChunkIdContext, DataIdContext } from "#/routes/match/$matchId/-game/store/context.ts";
 import { ChunkStore } from "#/routes/match/$matchId/-game/store/store.ts";
 import {
 	canInteractWithTeam,
@@ -30,23 +27,12 @@ export const DataRenderer = () => {
 	const { config, utils } = useInvariantContext(GameConfigContext);
 
 	const data = useSelector(ChunkStore, (state) =>
-		ChunkStore.actions.getData(
-			dataId,
-			ChunkStore.actions.getChunk(chunkId, state),
-		),
+		ChunkStore.actions.getData(dataId, ChunkStore.actions.getChunk(chunkId, state)),
 	);
 
-	const removedTiles = useSelector(
-		WorldStateStore,
-		(state) => state.closingZone.removed,
-	);
-	const selectedPiece = useSelector(
-		WorldStateStore,
-		(state) => state.selectedPiece,
-	);
-	const canAct = useSelector(WorldStateStore, (state) =>
-		canLocalPlayerAct(state),
-	);
+	const removedTiles = useSelector(WorldStateStore, (state) => state.closingZone.removed);
+	const selectedPiece = useSelector(WorldStateStore, (state) => state.selectedPiece);
+	const canAct = useSelector(WorldStateStore, (state) => canLocalPlayerAct(state));
 	const isOwnPiece = useSelector(WorldStateStore, (state) =>
 		canInteractWithTeam(state, data.attributes.teamId),
 	);
@@ -70,14 +56,9 @@ export const DataRenderer = () => {
 			})
 		: [];
 
-	const position = utils.gridCoordToWorldPosition(
-		data.attributes.x,
-		data.attributes.y,
-	);
+	const position = utils.gridCoordToWorldPosition(data.attributes.x, data.attributes.y);
 
-	const color = isSelected
-		? config.piece.hoverColor
-		: data.attributes.color;
+	const color = isSelected ? config.piece.hoverColor : data.attributes.color;
 
 	const handleClick = (event: { stopPropagation: () => void }) => {
 		event.stopPropagation();
@@ -108,11 +89,7 @@ export const DataRenderer = () => {
 			return;
 		}
 
-		if (
-			selectedPiece &&
-			selectedPiece.dataId === dataId &&
-			selectedPiece.chunkId === chunkId
-		) {
+		if (selectedPiece && selectedPiece.dataId === dataId && selectedPiece.chunkId === chunkId) {
 			clearSelectedPiece();
 			return;
 		}
@@ -127,9 +104,7 @@ export const DataRenderer = () => {
 			))}
 			<group position={position}>
 				<mesh onClick={handleClick}>
-					<boxGeometry
-						args={[config.piece.size, config.piece.size, config.piece.size]}
-					/>
+					<boxGeometry args={[config.piece.size, config.piece.size, config.piece.size]} />
 					<meshStandardMaterial color={color} />
 				</mesh>
 				<PieceLabel

@@ -15,6 +15,30 @@ import { GameFiberNode } from "./-game";
 import "./MatchControls.css";
 import { getRandomPieceLetter } from "./-game/store/piece/getRandomPieceLetter";
 
+const matchShellRef = (node: HTMLDivElement | null) => {
+	if (!node) {
+		return;
+	}
+
+	return attachSelectionEscapeListener();
+};
+
+const handleTick = () => {
+	WorldStateStore.actions.tick();
+};
+
+const handlePassTurn = () => {
+	WorldStateStore.actions.passTurn();
+};
+
+const handlePlayAsChange = (teamName: TeamName) => {
+	WorldStateStore.setState((prev) => ({
+		...prev,
+		localPlayerTeamId: createTeamId(teamName),
+		selectedPiece: null,
+	}));
+};
+
 /***** ROUTE START *****/
 export const Route = createFileRoute("/match/$matchId/")({
 	component: RouteComponent,
@@ -25,40 +49,14 @@ function RouteComponent() {
 	const config = loadGameConfig();
 	const utils = createUtils(config);
 	const tick = useSelector(WorldStateStore, (state) => state.tick);
-	const activeTeamId = useSelector(
-		WorldStateStore,
-		(state) => state.activeTeamId,
-	);
-	const localPlayerTeamId = useSelector(
-		WorldStateStore,
-		(state) => state.localPlayerTeamId,
-	);
-	const canAct = useSelector(WorldStateStore, (state) =>
-		canLocalPlayerAct(state),
-	);
-
-	const matchShellRef = (node: HTMLDivElement | null) => {
-		if (!node) {
-			return;
-		}
-
-		return attachSelectionEscapeListener();
-	};
-
-	const handleTick = () => {
-		WorldStateStore.actions.tick();
-	};
-
-	const handlePassTurn = () => {
-		WorldStateStore.actions.passTurn();
-	};
+	const activeTeamId = useSelector(WorldStateStore, (state) => state.activeTeamId);
+	const localPlayerTeamId = useSelector(WorldStateStore, (state) => state.localPlayerTeamId);
+	const canAct = useSelector(WorldStateStore, (state) => canLocalPlayerAct(state));
 
 	const handleOnClick = () => {
 		batch(() => {
 			for (let i = 0; i < 10; i++) {
-				const teamId = createTeamId(
-					TEAM_IDS[Math.floor(Math.random() * TEAM_IDS.length)],
-				);
+				const teamId = createTeamId(TEAM_IDS[Math.floor(Math.random() * TEAM_IDS.length)]);
 
 				ChunkStore.actions.createData({
 					attributes: {
@@ -70,14 +68,6 @@ function RouteComponent() {
 				});
 			}
 		});
-	};
-
-	const handlePlayAsChange = (teamName: TeamName) => {
-		WorldStateStore.setState((prev) => ({
-			...prev,
-			localPlayerTeamId: createTeamId(teamName),
-			selectedPiece: null,
-		}));
 	};
 
 	const activeTeamName = activeTeamId as TeamName;
@@ -95,18 +85,12 @@ function RouteComponent() {
 						className="match-turn-indicator__swatch"
 						style={{ backgroundColor: activeTeamColor }}
 					/>
-					<span className="match-turn-indicator__label">
-						{activeTeamName}
-					</span>
+					<span className="match-turn-indicator__label">{activeTeamName}</span>
 				</div>
 
 				<div className="match-controls">
 					{!canAct ? (
-						<button
-							type="button"
-							className="match-controls__button"
-							onClick={handlePassTurn}
-						>
+						<button type="button" className="match-controls__button" onClick={handlePassTurn}>
 							Next player
 						</button>
 					) : null}
@@ -117,11 +101,7 @@ function RouteComponent() {
 					>
 						Tick ({tick})
 					</button>
-					<button
-						type="button"
-						className="match-controls__button"
-						onClick={handleOnClick}
-					>
+					<button type="button" className="match-controls__button" onClick={handleOnClick}>
 						more!
 					</button>
 				</div>

@@ -20,10 +20,7 @@ Pass `options.compare` only when you need custom equality (e.g. deep or shallow 
 ```tsx
 const tick = useSelector(WorldStateStore, (state) => state.tick);
 const canAct = useSelector(WorldStateStore, (state) => canLocalPlayerAct(state));
-const removed = useSelector(
-  WorldStateStore,
-  (state) => state.closingZone.removed,
-);
+const removed = useSelector(WorldStateStore, (state) => state.closingZone.removed);
 ```
 
 ```tsx

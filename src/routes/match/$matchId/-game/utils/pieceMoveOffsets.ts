@@ -61,11 +61,6 @@ export function gridCoordKey(coord: GridCoord): string {
 	return `${coord.x},${coord.y}`;
 }
 
-export function isOnBoard(
-	coord: GridCoord,
-	boardSize: number,
-): coord is GridCoord {
-	return (
-		coord.x >= 0 && coord.x < boardSize && coord.y >= 0 && coord.y < boardSize
-	);
+export function isOnBoard(coord: GridCoord, boardSize: number): coord is GridCoord {
+	return coord.x >= 0 && coord.x < boardSize && coord.y >= 0 && coord.y < boardSize;
 }

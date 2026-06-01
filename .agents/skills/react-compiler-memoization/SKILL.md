@@ -21,17 +21,17 @@ This project compiles React with the React Compiler (`babel-plugin-react-compile
 ```tsx
 // Preferred
 function Board({ size }: { size: number }) {
-  const squares = buildSquares(size);
+	const squares = buildSquares(size);
 
-  return (
-    <ul>
-      {squares.map((square) => (
-        <li key={square.id} onClick={() => select(square.id)}>
-          {square.label}
-        </li>
-      ))}
-    </ul>
-  );
+	return (
+		<ul>
+			{squares.map((square) => (
+				<li key={square.id} onClick={() => select(square.id)}>
+					{square.label}
+				</li>
+			))}
+		</ul>
+	);
 }
 ```
 

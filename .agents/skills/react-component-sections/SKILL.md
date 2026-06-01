@@ -54,19 +54,19 @@ import type React from "react";
  *   TYPE DEFINITIONS
  **********************************************************************************************************/
 type MyWidget = React.FC<{
-  label: string;
-  count: number;
+	label: string;
+	count: number;
 }>;
 
 /**********************************************************************************************************
  *   COMPONENT START
  **********************************************************************************************************/
 export const MyWidget: MyWidget = ({ label, count }) => {
-  return (
-    <div>
-      {label}: {count}
-    </div>
-  );
+	return (
+		<div>
+			{label}: {count}
+		</div>
+	);
 };
 ```
 
@@ -76,17 +76,17 @@ Prop-less components skip the type alias — only `export const MyWidget = () =>
 
 Within COMPONENT START, order logic with `/***** X *****/` comments. Not every section is required — include a section only when it has content, but never reorder sections that are present.
 
-| Order | Section | Contents |
-|-------|---------|----------|
-| 1 | `state` | `useState`, `useRef`, `useToggle`, and similar local state |
-| 2 | `context` | Context reads (`use`, `useInvariantContext`, etc.) |
-| 3 | `hooks` | Other custom or library hooks not covered above |
-| 4 | `queries` | Data fetching (`useQuery`, `useSuspenseQuery`, etc.) |
-| 5 | `form` | Form state and handlers (`useForm`, field registration, etc.) |
-| 6 | `effects` | Side effects (`useEffect`, subscriptions, etc.) |
-| 7 | `functions` | Event handlers, callbacks, and other plain functions |
-| 8 | `render helpers` | Values or small helpers used only for JSX |
-| 9 | `render` | The `return (...)` JSX |
+| Order | Section          | Contents                                                      |
+| ----- | ---------------- | ------------------------------------------------------------- |
+| 1     | `state`          | `useState`, `useRef`, `useToggle`, and similar local state    |
+| 2     | `context`        | Context reads (`use`, `useInvariantContext`, etc.)            |
+| 3     | `hooks`          | Other custom or library hooks not covered above               |
+| 4     | `queries`        | Data fetching (`useQuery`, `useSuspenseQuery`, etc.)          |
+| 5     | `form`           | Form state and handlers (`useForm`, field registration, etc.) |
+| 6     | `effects`        | Side effects (`useEffect`, subscriptions, etc.)               |
+| 7     | `functions`      | Event handlers, callbacks, and other plain functions          |
+| 8     | `render helpers` | Values or small helpers used only for JSX                     |
+| 9     | `render`         | The `return (...)` JSX                                        |
 
 If a section has code, its comment must be present. Skip sections with nothing in them — do not leave empty commented blocks.
 
@@ -94,28 +94,30 @@ Cursor snippets: `comment_state`, `comment_context`, `comment_hooks`, `comment_q
 
 ```tsx
 export const MyWidget: MyWidget = ({ id }) => {
-  /***** state *****/
-  const [open, setOpen] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
+	/***** state *****/
+	const [open, setOpen] = useState(false);
+	const ref = useRef<HTMLDivElement>(null);
 
-  /***** context *****/
-  const { config } = use(GameConfigContext);
+	/***** context *****/
+	const { config } = use(GameConfigContext);
 
-  /***** queries *****/
-  const { data } = useQuery({ queryKey: ["widget", id], queryFn: () => fetchWidget(id) });
+	/***** queries *****/
+	const { data } = useQuery({ queryKey: ["widget", id], queryFn: () => fetchWidget(id) });
 
-  /***** functions *****/
-  const handleToggle = () => setOpen((prev) => !prev);
+	/***** functions *****/
+	const handleToggle = () => setOpen((prev) => !prev);
 
-  /***** render helpers *****/
-  const title = data?.name ?? "Loading…";
+	/***** render helpers *****/
+	const title = data?.name ?? "Loading…";
 
-  /***** render *****/
-  return (
-    <div ref={ref}>
-      <button type="button" onClick={handleToggle}>{title}</button>
-    </div>
-  );
+	/***** render *****/
+	return (
+		<div ref={ref}>
+			<button type="button" onClick={handleToggle}>
+				{title}
+			</button>
+		</div>
+	);
 };
 ```
 

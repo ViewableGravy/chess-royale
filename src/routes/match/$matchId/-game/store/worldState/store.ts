@@ -10,15 +10,10 @@ export const WorldStateStore = createStore(createInitialWorldState(), (api) => (
 	passTurn,
 }));
 
-const processedRemovedKeys = new Set(
-	WorldStateStore.get().closingZone.removed,
-);
+const processedRemovedKeys = new Set(WorldStateStore.get().closingZone.removed);
 
 WorldStateStore.subscribe((state) => {
-	const newlyRemoved = getNewlyRemovedKeys(
-		state.closingZone.removed,
-		processedRemovedKeys,
-	);
+	const newlyRemoved = getNewlyRemovedKeys(state.closingZone.removed, processedRemovedKeys);
 
 	if (newlyRemoved.length > 0) {
 		removePiecesOnRemovedTiles(newlyRemoved);

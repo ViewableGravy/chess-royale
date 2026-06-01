@@ -11,11 +11,7 @@ export function advanceClosingZone(
 	tick: number,
 ): ClosingZoneState {
 	const { warnings, removed } = escalateWarnings(closingZone);
-	let activeRing = resolveActiveRing(
-		closingZone.activeRing,
-		removed,
-		boardSize,
-	);
+	let activeRing = resolveActiveRing(closingZone.activeRing, removed, boardSize);
 
 	const maxRing = getMaxRingIndex(boardSize);
 	if (activeRing > maxRing) {

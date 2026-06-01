@@ -1,9 +1,5 @@
 import { batch } from "@tanstack/react-store";
-import type {
-	ChunkId,
-	DataId,
-	TeamId,
-} from "#/routes/match/$matchId/-game/store/consts.ts";
+import type { ChunkId, DataId, TeamId } from "#/routes/match/$matchId/-game/store/consts.ts";
 import { ChunkStore } from "#/routes/match/$matchId/-game/store/store.ts";
 import { getData } from "#/routes/match/$matchId/-game/store/actions/getData.ts";
 import { advanceActiveTeam } from "#/routes/match/$matchId/-game/store/worldState/gameInteraction/advanceActiveTeam.ts";
@@ -98,14 +94,9 @@ export function isSquareLegalMoveTarget(target: GridCoord): boolean {
 	return isCoordLegalMoveTarget(target, state, ChunkStore.state);
 }
 
-export function isPieceSelected(
-	dataId: DataId,
-	chunkId: ChunkId,
-): boolean {
+export function isPieceSelected(dataId: DataId, chunkId: ChunkId): boolean {
 	const { selectedPiece } = WorldStateStore.state;
 	return (
-		selectedPiece !== null &&
-		selectedPiece.dataId === dataId &&
-		selectedPiece.chunkId === chunkId
+		selectedPiece !== null && selectedPiece.dataId === dataId && selectedPiece.chunkId === chunkId
 	);
 }

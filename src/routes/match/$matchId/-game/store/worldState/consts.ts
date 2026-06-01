@@ -1,8 +1,4 @@
-import type {
-	ChunkId,
-	DataId,
-	TeamId,
-} from "#/routes/match/$matchId/-game/store/consts.ts";
+import type { ChunkId, DataId, TeamId } from "#/routes/match/$matchId/-game/store/consts.ts";
 
 export const MAX_WARNING_LEVEL = 5;
 

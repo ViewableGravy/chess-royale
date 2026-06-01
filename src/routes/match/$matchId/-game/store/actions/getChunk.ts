@@ -1,7 +1,4 @@
-import type {
-	ChunkId,
-	Chunks,
-} from "#/routes/match/$matchId/-game/store/consts.ts";
+import type { ChunkId, Chunks } from "#/routes/match/$matchId/-game/store/consts.ts";
 import type { ChunkStoreApi } from "#/routes/match/$matchId/-game/store/store.ts";
 
 export function createGetChunk({ get }: ChunkStoreApi) {

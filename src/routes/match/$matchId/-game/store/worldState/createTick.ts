@@ -3,9 +3,7 @@ import { advanceClosingZone } from "#/routes/match/$matchId/-game/store/worldSta
 import type { WorldState } from "#/routes/match/$matchId/-game/store/worldState/consts.ts";
 
 type WorldStateStoreApi = {
-	setState: (
-		updater: (prev: WorldState) => WorldState,
-	) => void;
+	setState: (updater: (prev: WorldState) => WorldState) => void;
 };
 
 export function createTick({ setState }: WorldStateStoreApi) {
@@ -13,11 +11,7 @@ export function createTick({ setState }: WorldStateStoreApi) {
 		setState((prev) => ({
 			...prev,
 			tick: prev.tick + 1,
-			closingZone: advanceClosingZone(
-				prev.closingZone,
-				prev.boardSize,
-				prev.tick + 1,
-			),
+			closingZone: advanceClosingZone(prev.closingZone, prev.boardSize, prev.tick + 1),
 			selectedPiece: null,
 			activeTeamId: FIRST_TURN_TEAM_ID,
 		}));

@@ -13,8 +13,12 @@ moveHighlightOpacity = 0.9
 labelFontSize = 0.28
 
 [camera]
-position = [0, 0, 28]
-fov = 50
+# Orthographic isometric: equal x/y/z offset from origin (see getIsometricCameraPosition).
+distance = 22
+# Multiplier on board half-diagonal for frustum sizing (1.0 = tight fit).
+fitPadding = 1.12
+near = 0.1
+far = 500
 
 [canvas]
 height = 800
@@ -24,5 +28,5 @@ background = "#0f172a"
 intensity = 0.7
 
 [lighting.directional]
-position = [3, 5, 2]
+position = [4, 8, 6]
 intensity = 1.2

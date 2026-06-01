@@ -2,6 +2,8 @@ import { MAX_WARNING_LEVEL } from "#/routes/match/$matchId/-game/store/worldStat
 
 const DANGER_COLOR = { r: 255, g: 68, b: 68 };
 
+const clampColorChannel = (channel: number) => Math.max(0, Math.min(255, Math.round(channel)));
+
 function parseHexColor(hex: string): { r: number; g: number; b: number } {
 	const normalized = hex.replace("#", "");
 	const value = Number.parseInt(normalized, 16);
@@ -14,18 +16,12 @@ function parseHexColor(hex: string): { r: number; g: number; b: number } {
 }
 
 function toHexColor({ r, g, b }: { r: number; g: number; b: number }): string {
-	const clamp = (channel: number) =>
-		Math.max(0, Math.min(255, Math.round(channel)));
-
-	return `#${[clamp(r), clamp(g), clamp(b)]
+	return `#${[clampColorChannel(r), clampColorChannel(g), clampColorChannel(b)]
 		.map((channel) => channel.toString(16).padStart(2, "0"))
 		.join("")}`;
 }
 
-export function blendSquareColor(
-	baseColor: string,
-	warningLevel: 0 | 1 | 2 | 3 | 4 | 5,
-): string {
+export function blendSquareColor(baseColor: string, warningLevel: 0 | 1 | 2 | 3 | 4 | 5): string {
 	if (warningLevel === 0) {
 		return baseColor;
 	}

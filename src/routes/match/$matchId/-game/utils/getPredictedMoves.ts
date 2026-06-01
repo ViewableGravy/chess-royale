@@ -114,10 +114,7 @@ function collectPawnMoves(
 		const target = { x: origin.x + dx, y: origin.y + dy };
 		const key = gridCoordKey(target);
 
-		if (
-			!isPlayableSquare(target, boardSize, removed) ||
-			occupied.has(key)
-		) {
+		if (!isPlayableSquare(target, boardSize, removed) || occupied.has(key)) {
 			continue;
 		}
 
@@ -128,10 +125,7 @@ function collectPawnMoves(
 		const target = { x: origin.x + dx, y: origin.y + dy };
 		const key = gridCoordKey(target);
 
-		if (
-			!isPlayableSquare(target, boardSize, removed) ||
-			!isEnemySquare(key, teamId, squareTeams)
-		) {
+		if (!isPlayableSquare(target, boardSize, removed) || !isEnemySquare(key, teamId, squareTeams)) {
 			continue;
 		}
 
@@ -176,13 +170,6 @@ export function getPredictedMoves({
 				squareTeams,
 			);
 		case "pawn":
-			return collectPawnMoves(
-				origin,
-				boardSize,
-				occupied,
-				removed,
-				teamId,
-				squareTeams,
-			);
+			return collectPawnMoves(origin, boardSize, occupied, removed, teamId, squareTeams);
 	}
 }

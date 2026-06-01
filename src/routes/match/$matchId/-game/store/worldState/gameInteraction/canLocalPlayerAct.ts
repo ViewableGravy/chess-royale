@@ -1,12 +1,14 @@
 import type { TeamId } from "#/routes/match/$matchId/-game/store/consts.ts";
 import type { WorldState } from "#/routes/match/$matchId/-game/store/worldState/consts.ts";
 
-export function canLocalPlayerAct(state: WorldState): boolean {
+export function canLocalPlayerAct(
+	state: Pick<WorldState, "activeTeamId" | "localPlayerTeamId">,
+): boolean {
 	return state.activeTeamId === state.localPlayerTeamId;
 }
 
 export function canInteractWithTeam(
-	state: WorldState,
+	state: Pick<WorldState, "activeTeamId" | "localPlayerTeamId">,
 	teamId: TeamId,
 ): boolean {
 	return (

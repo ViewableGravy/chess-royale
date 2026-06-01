@@ -1,8 +1,5 @@
 import { createContext } from "react";
-import type {
-	ChunkId,
-	DataId,
-} from "#/routes/match/$matchId/-game/store/consts.ts";
+import type { ChunkId, DataId } from "#/routes/match/$matchId/-game/store/consts.ts";
 
 /***** CONSTS *****/
 export const ChunkIdContext = createContext<ChunkId | null>(null);

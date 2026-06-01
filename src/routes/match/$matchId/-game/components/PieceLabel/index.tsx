@@ -34,13 +34,16 @@ export const PieceLabel: PieceLabel = ({ letter, size, pieceSize }) => {
 	texture.needsUpdate = true;
 
 	return (
-		<mesh position={[0, 0, pieceSize / 2 + 0.01]} raycast={() => null}>
+		<mesh
+			position={[0, pieceSize / 2 + 0.01, 0]}
+			rotation={[-Math.PI / 2, 0, 0]}
+			raycast={() => null}
+		>
 			<planeGeometry args={[size, size]} />
 			<meshBasicMaterial
 				depthWrite={false}
 				map={texture}
 				ref={(material: MeshBasicMaterial) => {
-
 					return () => {
 						material.map?.dispose();
 					};

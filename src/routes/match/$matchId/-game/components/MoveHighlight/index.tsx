@@ -9,21 +9,11 @@ type MoveHighlight = React.FC<{
 
 export const MoveHighlight: MoveHighlight = ({ x, y }) => {
 	const { config, utils } = useInvariantContext(GameConfigContext);
-	const position = utils.gridCoordToWorldPosition(
-		x,
-		y,
-		config.board.squareDepth / 2 + 0.01,
-	);
+	const position = utils.gridCoordToWorldPosition(x, y, config.board.squareDepth / 2 + 0.01);
 
 	return (
 		<mesh position={position} raycast={() => null}>
-			<boxGeometry
-				args={[
-					config.board.squareSize * 0.88,
-					config.board.squareSize * 0.88,
-					0.015,
-				]}
-			/>
+			<boxGeometry args={[config.board.squareSize * 0.88, 0.015, config.board.squareSize * 0.88]} />
 			<meshStandardMaterial
 				color={config.piece.moveHighlightColor}
 				emissive={config.piece.moveHighlightColor}

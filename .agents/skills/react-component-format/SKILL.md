@@ -28,7 +28,11 @@ type MyComponent = React.FC<{
 }>;
 
 export const MyComponent: MyComponent = ({ size, label }) => {
-	return <div>{label}: {size}</div>;
+	return (
+		<div>
+			{label}: {size}
+		</div>
+	);
 };
 ```
 

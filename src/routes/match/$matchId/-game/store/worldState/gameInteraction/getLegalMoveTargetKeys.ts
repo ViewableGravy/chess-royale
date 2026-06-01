@@ -68,7 +68,5 @@ export function isCoordLegalMoveTarget(
 	>,
 	chunks: Chunks,
 ): boolean {
-	return getLegalMoveTargetKeys(worldState, chunks).has(
-		gridCoordKey(target),
-	);
+	return getLegalMoveTargetKeys(worldState, chunks).has(gridCoordKey(target));
 }

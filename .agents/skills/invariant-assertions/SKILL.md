@@ -28,7 +28,7 @@ invariant(context, "Failed to create 2d canvas context for piece label");
 ```tsx
 const context = canvas.getContext("2d");
 if (!context) {
-  throw new Error("Failed to create 2d canvas context for piece label");
+	throw new Error("Failed to create 2d canvas context for piece label");
 }
 ```
 
