@@ -1,3 +1,9 @@
+import type {
+	ChunkId,
+	DataId,
+	TeamId,
+} from "#/routes/match/$matchId/-game/store/consts.ts";
+
 export const MAX_WARNING_LEVEL = 5;
 
 export type WarningLevel = 1 | 2 | 3 | 4 | 5;
@@ -17,8 +23,18 @@ export type ClosingZoneState = {
 	removed: Set<string>;
 };
 
+export type SelectedPiece = {
+	dataId: DataId;
+	chunkId: ChunkId;
+};
+
 export type WorldState = {
 	tick: number;
 	boardSize: number;
 	closingZone: ClosingZoneState;
+	selectedPiece: SelectedPiece | null;
+	/** Team that may move before the next tick. */
+	activeTeamId: TeamId;
+	/** Team controlled by the local human player. */
+	localPlayerTeamId: TeamId;
 };

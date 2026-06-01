@@ -1,47 +1,108 @@
 import { OrbitControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
+import { MOUSE } from "three";
 import { ClientOnly } from "@tanstack/react-router";
 import { useSelector } from "@tanstack/react-store";
+import { useState } from "react";
 import { useInvariantContext } from "#/hooks/useInvariantContext/index.ts";
 import { GameConfigContext } from "#/routes/match/$matchId/-game/context/GameConfigContext.tsx";
 import { ChunkIdContext } from "#/routes/match/$matchId/-game/store/context.ts";
 import { ChunkStore } from "#/routes/match/$matchId/-game/store/store.ts";
+import { WorldStateStore } from "#/routes/match/$matchId/-game/store/worldState/store.ts";
 import { ChessBoardFlatMeshes } from "./components/ChessBoard/index.tsx";
 import { ChunkRenderer } from "./components/ChunkRenderer";
+import "./GameFiberNode.css";
+
+type CanvasSize = {
+	width: number;
+	height: number;
+};
+
+function getViewportCanvasSize(): CanvasSize {
+	return {
+		width: window.innerWidth,
+		height: window.innerHeight,
+	};
+}
 
 /***** COMPONENT START *****/
 export const GameFiberNode = () => {
 	const { config } = useInvariantContext(GameConfigContext);
 	const chunkIds = useSelector(ChunkStore, (state) => Array.from(state.keys()));
+	const selectedPiece = useSelector(
+		WorldStateStore,
+		(state) => state.selectedPiece,
+	);
+	const [canvasSize, setCanvasSize] = useState<CanvasSize>(() =>
+		typeof window === "undefined" ? { width: 0, height: 0 } : getViewportCanvasSize(),
+	);
+
+	const gameCanvasContainerRef = (node: HTMLDivElement | null) => {
+		if (!node) {
+			return;
+		}
+
+		const updateCanvasSize = () => {
+			setCanvasSize({
+				width: node.clientWidth,
+				height: node.clientHeight,
+			});
+		};
+
+		updateCanvasSize();
+
+		const resizeObserver = new ResizeObserver(updateCanvasSize);
+		resizeObserver.observe(node);
+
+		return () => {
+			resizeObserver.disconnect();
+		};
+	};
+
+	const canPanCamera = selectedPiece === null;
 
 	return (
 		<ClientOnly>
-			<Canvas
-				dpr={[1, 1.5]}
-				id="game-canvas"
-				style={{ height: `${config.canvas.height}px` }}
-				camera={{
-					position: config.camera.position,
-					fov: config.camera.fov,
-				}}
-			>
-				<color attach="background" args={[config.canvas.background]} />
-				<ambientLight intensity={config.lighting.ambient.intensity} />
-				<directionalLight
-					position={config.lighting.directional.position}
-					intensity={config.lighting.directional.intensity}
-				/>
+			<div ref={gameCanvasContainerRef} className="game-fiber-canvas">
+				<Canvas
+					dpr={[1, 1.5]}
+					id="game-canvas"
+					style={{
+						width: canvasSize.width,
+						height: canvasSize.height,
+					}}
+					camera={{
+						position: config.camera.position,
+						fov: config.camera.fov,
+					}}
+				>
+					<color attach="background" args={[config.canvas.background]} />
+					<ambientLight intensity={config.lighting.ambient.intensity} />
+					<directionalLight
+						position={config.lighting.directional.position}
+						intensity={config.lighting.directional.intensity}
+					/>
 
-				<OrbitControls />
+					<OrbitControls
+						enableRotate={false}
+						enablePan={canPanCamera}
+						enableZoom
+						mouseButtons={{
+							LEFT: MOUSE.PAN,
+							MIDDLE: MOUSE.DOLLY,
+							RIGHT: MOUSE.PAN,
+						}}
+					/>
 
-				<ChessBoardFlatMeshes />
+					<ChessBoardFlatMeshes />
 
-				{chunkIds.map((chunkId) => (
-					<ChunkIdContext key={chunkId} value={chunkId}>
-						<ChunkRenderer />
-					</ChunkIdContext>
-				))}
-			</Canvas>
+					{chunkIds.map((chunkId) => (
+						<ChunkIdContext key={chunkId} value={chunkId}>
+							<ChunkRenderer />
+						</ChunkIdContext>
+					))}
+				</Canvas>
+			</div>
 		</ClientOnly>
 	);
 };

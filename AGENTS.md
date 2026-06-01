@@ -25,6 +25,7 @@ When working on React (`.tsx` / `.jsx`), read and follow:
 - [`.agents/skills/react-context-usage/SKILL.md`](.agents/skills/react-context-usage/SKILL.md) — read contexts with `useInvariantContext` or `use`; no thin `useXContext` wrappers.
 - [`.agents/skills/react-avoid-use-effect/SKILL.md`](.agents/skills/react-avoid-use-effect/SKILL.md) — do not use `useEffect`; ask before adding it if unavoidable.
 - [`.agents/skills/invariant-assertions/SKILL.md`](.agents/skills/invariant-assertions/SKILL.md) — use `invariant()` for must-be-true checks; not `if (x) throw`.
+- [`.agents/skills/tanstack-store-selectors/SKILL.md`](.agents/skills/tanstack-store-selectors/SKILL.md) — targeted `useSelector` slices; never `(state) => state` on spread-updated stores.
 
 ## Style Guidelines
 

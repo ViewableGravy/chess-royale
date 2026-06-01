@@ -1,4 +1,8 @@
 import type { GameConfig } from "#/assets/config/loadGameConfig.ts";
+import {
+	type GridCoord,
+	isOnBoard,
+} from "#/routes/match/$matchId/-game/utils/pieceMoveOffsets.ts";
 
 export type Vec3 = [number, number, number];
 export type Utils = ReturnType<typeof createUtils>;
@@ -36,11 +40,28 @@ export function createUtils(config: GameConfig) {
 		return [center[0], center[1], z];
 	}
 
+	function worldPositionToGridCoord(
+		worldX: number,
+		worldY: number,
+	): GridCoord | null {
+		const halfBoard = getBoardHalfExtent();
+		const col = Math.floor((worldX + halfBoard) / squareSize);
+		const row = Math.floor((worldY + halfBoard) / squareSize);
+		const coord = { x: col, y: row };
+
+		if (!isOnBoard(coord, boardSize)) {
+			return null;
+		}
+
+		return coord;
+	}
+
 	return {
 		getBoardHalfExtent,
 		getSquareTopLeft,
 		getSquareCenterFromTopLeft,
 		getSquareCenter,
 		gridCoordToWorldPosition,
+		worldPositionToGridCoord,
 	};
 }

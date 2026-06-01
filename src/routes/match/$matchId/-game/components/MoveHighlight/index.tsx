@@ -19,14 +19,16 @@ export const MoveHighlight: MoveHighlight = ({ x, y }) => {
 		<mesh position={position} raycast={() => null}>
 			<boxGeometry
 				args={[
-					config.board.squareSize * 0.85,
-					config.board.squareSize * 0.85,
-					0.01,
+					config.board.squareSize * 0.88,
+					config.board.squareSize * 0.88,
+					0.015,
 				]}
 			/>
 			<meshStandardMaterial
 				color={config.piece.moveHighlightColor}
-				opacity={0.55}
+				emissive={config.piece.moveHighlightColor}
+				emissiveIntensity={0.45}
+				opacity={config.piece.moveHighlightOpacity}
 				transparent
 			/>
 		</mesh>

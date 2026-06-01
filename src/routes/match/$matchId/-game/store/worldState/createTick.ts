@@ -1,3 +1,4 @@
+import { FIRST_TURN_TEAM_ID } from "#/routes/match/$matchId/-game/store/turnOrder.ts";
 import { advanceClosingZone } from "#/routes/match/$matchId/-game/store/worldState/closingZone/advanceClosingZone.ts";
 import type { WorldState } from "#/routes/match/$matchId/-game/store/worldState/consts.ts";
 
@@ -17,6 +18,8 @@ export function createTick({ setState }: WorldStateStoreApi) {
 				prev.boardSize,
 				prev.tick + 1,
 			),
+			selectedPiece: null,
+			activeTeamId: FIRST_TURN_TEAM_ID,
 		}));
 	};
 }

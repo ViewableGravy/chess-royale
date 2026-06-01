@@ -1,0 +1,153 @@
+.match-shell {
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+
+.match-turn-indicator {
+	position: fixed;
+	top: 1rem;
+	left: 1rem;
+	z-index: 10;
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	padding: 0.375rem 0.625rem;
+	border-radius: 0.5rem;
+	background: rgb(15 23 42 / 0.88);
+	border: 1px solid rgb(148 163 184 / 0.45);
+	box-shadow:
+		0 1px 2px rgb(0 0 0 / 0.35),
+		0 4px 12px rgb(0 0 0 / 0.25);
+	backdrop-filter: blur(6px);
+	pointer-events: none;
+}
+
+.match-turn-indicator__swatch {
+	width: 1.25rem;
+	height: 1.25rem;
+	border-radius: 0.25rem;
+	border: 1px solid rgb(148 163 184 / 0.55);
+	flex-shrink: 0;
+}
+
+.match-turn-indicator__label {
+	color: #f8fafc;
+	font-size: 0.8125rem;
+	font-weight: 600;
+	text-transform: capitalize;
+}
+
+.match-controls {
+	position: fixed;
+	top: 1rem;
+	right: 1rem;
+	z-index: 10;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-end;
+	gap: 0.5rem;
+	pointer-events: auto;
+}
+
+.match-controls__button {
+	appearance: none;
+	border: 1px solid rgb(148 163 184 / 0.45);
+	border-radius: 0.5rem;
+	background: rgb(15 23 42 / 0.88);
+	color: #f8fafc;
+	padding: 0.5rem 0.875rem;
+	font-size: 0.875rem;
+	font-weight: 600;
+	line-height: 1.25;
+	cursor: pointer;
+	box-shadow:
+		0 1px 2px rgb(0 0 0 / 0.35),
+		0 4px 12px rgb(0 0 0 / 0.25);
+	backdrop-filter: blur(6px);
+	transition:
+		background-color 120ms ease,
+		border-color 120ms ease,
+		transform 80ms ease;
+}
+
+.match-controls__button:hover {
+	background: rgb(30 41 59 / 0.95);
+	border-color: rgb(203 213 225 / 0.65);
+}
+
+.match-controls__button:active {
+	transform: translateY(1px);
+}
+
+.match-controls__button:focus-visible {
+	outline: 2px solid #38bdf8;
+	outline-offset: 2px;
+}
+
+.match-controls__button--primary {
+	border-color: rgb(56 189 248 / 0.55);
+	background: rgb(2 132 199 / 0.9);
+}
+
+.match-controls__button--primary:hover {
+	background: rgb(3 105 161 / 0.95);
+	border-color: rgb(125 211 252 / 0.75);
+}
+
+.match-play-as {
+	position: fixed;
+	top: 4.25rem;
+	left: 1rem;
+	z-index: 10;
+	display: flex;
+	align-items: center;
+	gap: 0.375rem;
+	padding: 0.375rem 0.5rem;
+	border-radius: 0.5rem;
+	background: rgb(15 23 42 / 0.88);
+	border: 1px solid rgb(148 163 184 / 0.45);
+	box-shadow:
+		0 1px 2px rgb(0 0 0 / 0.35),
+		0 4px 12px rgb(0 0 0 / 0.25);
+	backdrop-filter: blur(6px);
+	pointer-events: auto;
+}
+
+.match-play-as__label {
+	color: #94a3b8;
+	font-size: 0.75rem;
+	font-weight: 600;
+	margin-right: 0.125rem;
+}
+
+.match-play-as__team {
+	appearance: none;
+	padding: 0.125rem;
+	border: 1px solid transparent;
+	border-radius: 0.375rem;
+	background: transparent;
+	cursor: pointer;
+}
+
+.match-play-as__team:hover {
+	border-color: rgb(148 163 184 / 0.45);
+}
+
+.match-play-as__team[data-selected] {
+	border-color: #38bdf8;
+	box-shadow: 0 0 0 1px rgb(56 189 248 / 0.35);
+}
+
+.match-play-as__team:focus-visible {
+	outline: 2px solid #38bdf8;
+	outline-offset: 2px;
+}
+
+.match-play-as__swatch {
+	display: block;
+	width: 1.125rem;
+	height: 1.125rem;
+	border-radius: 0.25rem;
+	border: 1px solid rgb(148 163 184 / 0.55);
+}

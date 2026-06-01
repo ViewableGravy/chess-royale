@@ -1,5 +1,4 @@
 import { useSelector } from "@tanstack/react-store";
-import { useState } from "react";
 import { useInvariantContext } from "#/hooks/useInvariantContext/index.ts";
 import { MoveHighlight } from "#/routes/match/$matchId/-game/components/MoveHighlight/index.tsx";
 import { PieceLabel } from "#/routes/match/$matchId/-game/components/PieceLabel/index.tsx";
@@ -8,8 +7,19 @@ import {
 	ChunkIdContext,
 	DataIdContext,
 } from "#/routes/match/$matchId/-game/store/context.ts";
-import type { TeamId } from "#/routes/match/$matchId/-game/store/consts.ts";
 import { ChunkStore } from "#/routes/match/$matchId/-game/store/store.ts";
+import {
+	canInteractWithTeam,
+	canLocalPlayerAct,
+} from "#/routes/match/$matchId/-game/store/worldState/gameInteraction/canLocalPlayerAct.ts";
+import { getBoardOccupancy } from "#/routes/match/$matchId/-game/store/worldState/gameInteraction/getBoardOccupancy.ts";
+import {
+	clearSelectedPiece,
+	isPieceSelected,
+	isSquareLegalMoveTarget,
+	selectPiece,
+	tryMoveSelectedPiece,
+} from "#/routes/match/$matchId/-game/store/worldState/gameInteraction/tryMoveSelectedPiece.ts";
 import { WorldStateStore } from "#/routes/match/$matchId/-game/store/worldState/store.ts";
 import { getPredictedMoves } from "#/routes/match/$matchId/-game/utils/getPredictedMoves.ts";
 import { gridCoordKey } from "#/routes/match/$matchId/-game/utils/pieceMoveOffsets.ts";
@@ -18,7 +28,6 @@ export const DataRenderer = () => {
 	const chunkId = useInvariantContext(ChunkIdContext);
 	const dataId = useInvariantContext(DataIdContext);
 	const { config, utils } = useInvariantContext(GameConfigContext);
-	const [hovered, setHovered] = useState(false);
 
 	const data = useSelector(ChunkStore, (state) =>
 		ChunkStore.actions.getData(
@@ -31,26 +40,24 @@ export const DataRenderer = () => {
 		WorldStateStore,
 		(state) => state.closingZone.removed,
 	);
+	const selectedPiece = useSelector(
+		WorldStateStore,
+		(state) => state.selectedPiece,
+	);
+	const canAct = useSelector(WorldStateStore, (state) =>
+		canLocalPlayerAct(state),
+	);
+	const isOwnPiece = useSelector(WorldStateStore, (state) =>
+		canInteractWithTeam(state, data.attributes.teamId),
+	);
 
-	const { occupiedSquares, squareTeams } = useSelector(ChunkStore, (state) => {
-		const occupied = new Set<string>();
-		const teams = new Map<string, TeamId>();
+	const isSelected = isPieceSelected(dataId, chunkId);
 
-		for (const chunk of state.values()) {
-			for (const entry of chunk.data.values()) {
-				const key = gridCoordKey({
-					x: entry.attributes.x,
-					y: entry.attributes.y,
-				});
-				occupied.add(key);
-				teams.set(key, entry.attributes.teamId);
-			}
-		}
+	const { occupiedSquares, squareTeams } = useSelector(ChunkStore, (state) =>
+		getBoardOccupancy(state, isSelected ? { dataId, chunkId } : undefined),
+	);
 
-		return { occupiedSquares: occupied, squareTeams: teams };
-	});
-
-	const predictedMoves = hovered
+	const predictedMoves = isSelected
 		? getPredictedMoves({
 				piece: data.attributes.piece,
 				x: data.attributes.x,
@@ -68,24 +75,58 @@ export const DataRenderer = () => {
 		data.attributes.y,
 	);
 
-	const color = hovered ? config.piece.hoverColor : data.attributes.color;
+	const color = isSelected
+		? config.piece.hoverColor
+		: data.attributes.color;
+
+	const handleClick = (event: { stopPropagation: () => void }) => {
+		event.stopPropagation();
+
+		if (!canAct) {
+			return;
+		}
+
+		if (
+			selectedPiece &&
+			selectedPiece.dataId !== dataId &&
+			isSquareLegalMoveTarget({
+				x: data.attributes.x,
+				y: data.attributes.y,
+			})
+		) {
+			tryMoveSelectedPiece({
+				x: data.attributes.x,
+				y: data.attributes.y,
+			});
+			return;
+		}
+
+		if (!isOwnPiece) {
+			if (selectedPiece) {
+				clearSelectedPiece();
+			}
+			return;
+		}
+
+		if (
+			selectedPiece &&
+			selectedPiece.dataId === dataId &&
+			selectedPiece.chunkId === chunkId
+		) {
+			clearSelectedPiece();
+			return;
+		}
+
+		selectPiece({ dataId, chunkId });
+	};
 
 	return (
 		<>
 			{predictedMoves.map((move) => (
 				<MoveHighlight key={gridCoordKey(move)} x={move.x} y={move.y} />
 			))}
-			<group
-				position={position}
-				onPointerOut={() => {
-					setHovered(false);
-				}}
-				onPointerOver={(event) => {
-					event.stopPropagation();
-					setHovered(true);
-				}}
-			>
-				<mesh>
+			<group position={position}>
+				<mesh onClick={handleClick}>
 					<boxGeometry
 						args={[config.piece.size, config.piece.size, config.piece.size]}
 					/>
