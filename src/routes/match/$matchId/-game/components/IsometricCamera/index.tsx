@@ -9,7 +9,6 @@ import { useGameCamera } from "#/routes/match/$matchId/-game/hooks/useGameCamera
 import { WorldStateStore } from "#/routes/match/$matchId/-game/store/worldState/store.ts";
 import { useThree } from "@react-three/fiber";
 import { useSelector } from "@tanstack/react-store";
-import type { OrbitControls as OrbitControlsImpl } from "three-stdlib";
 
 /**
  * Configures the Canvas orthographic camera (world-space frustum + isometric angle).
@@ -24,7 +23,7 @@ export const IsometricCamera = () => {
 	const { config } = useInvariantContext(GameConfigContext);
 	const camera = useGameCamera();
 	const size = useThree((state) => state.size);
-	const controls = useThree((state) => state.controls as OrbitControlsImpl | undefined);
+	const controls = useThree((state) => state.controls);
 	const localPlayerTeamId = useSelector(WorldStateStore, (state) => state.localPlayerTeamId);
 	const aspect = size.width / size.height || 1;
 

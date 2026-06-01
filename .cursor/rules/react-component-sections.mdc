@@ -46,4 +46,4 @@ Use `/***** section *****/` comments. Include a section only when it has code; k
 | 8     | `render helpers`   |
 | 9     | `render`           |
 
-Component shape: `type Name = React.FC<{...}>` in TYPE DEFINITIONS; `export const Name: Name = ...` in COMPONENT START. See `.agents/skills/react-component-format/SKILL.md` for prop-less and route exceptions.
+Component shape: `type Name = React.FC<{...}>` in TYPE DEFINITIONS; `export const Name: Name = ...` in COMPONENT START. **One component per file** (see `.cursor/rules/one-component-per-file.mdc`). Route and prop-less exceptions: `.agents/skills/react-component-format/SKILL.md`.

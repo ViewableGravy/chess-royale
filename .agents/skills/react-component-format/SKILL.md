@@ -13,6 +13,14 @@ paths:
 
 # React Component Format
 
+## One component per file
+
+Each `.tsx` / `.jsx` file defines **at most one** React component. Extract additional components into their own files (folder + `index.tsx` matches the rest of the repo). Context objects, types, and pure helpers may share the file with that component, or live in a sibling `.ts` module when reused.
+
+**Exception:** TanStack route modules may define the `Route` export and the route `component` / `shellComponent` function in the same file (see below).
+
+## Component shapes
+
 Every React component in this project follows one of two shapes — except route components (see below).
 
 ## Components with props

@@ -1,0 +1,21 @@
+---
+description: One React component per .tsx file — no multiple components in the same module.
+globs: "**/*.{tsx,jsx}"
+alwaysApply: false
+---
+
+# One component per file
+
+Each `.tsx` / `.jsx` file defines **at most one** React component.
+
+- Put additional components in their own file (folder + `index.tsx` is fine).
+- Non-component exports (types, constants, context objects, pure helpers) may live in the same file as that single component, or in a sibling `.ts` module when shared.
+- **Exception:** TanStack Router route modules may also define the route’s `component` / `shellComponent` function in the same file as the `Route` export. See `.agents/skills/react-component-format/SKILL.md`.
+
+```tsx
+// Avoid — two components in ChessBoard/index.tsx
+const BoardTilesLayer = () => { ... };
+export const ChessBoardFlatMeshes = () => { ... };
+
+// Prefer — BoardTilesLayer/index.tsx + ChessBoard/index.tsx
+```

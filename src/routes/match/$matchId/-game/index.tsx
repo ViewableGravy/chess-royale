@@ -78,6 +78,7 @@ export const GameFiberNode = () => {
 					/>
 
 					<OrbitControls
+						makeDefault
 						key={localPlayerTeamId}
 						enableRotate={false}
 						enablePan

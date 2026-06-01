@@ -1,38 +1,46 @@
 import type React from "react";
-import { useSelector } from "@tanstack/react-store";
 import { useInvariantContext } from "#/hooks/useInvariantContext/index.ts";
 import { GameConfigContext } from "#/routes/match/$matchId/-game/context/GameConfigContext.tsx";
-import { canLocalPlayerAct } from "#/routes/match/$matchId/-game/store/worldState/gameInteraction/canLocalPlayerAct.ts";
-import {
-	clearSelectedPiece,
-	tryMoveSelectedPiece,
-} from "#/routes/match/$matchId/-game/store/worldState/gameInteraction/tryMoveSelectedPiece.ts";
-import { WorldStateStore } from "#/routes/match/$matchId/-game/store/worldState/store.ts";
+
+/**********************************************************************************************************
+ *   TYPE DEFINITIONS
+ **********************************************************************************************************/
+export type GridPickCoord = {
+	x: number;
+	y: number;
+};
 
 type BoardSquarePick = React.FC<{
 	x: number;
 	y: number;
 	position: [number, number, number];
 	isTarget: boolean;
+	pickActive: boolean;
+	onPick: (coord: GridPickCoord) => void;
 }>;
 
-export const BoardSquarePick: BoardSquarePick = ({ x, y, position, isTarget }) => {
+/**********************************************************************************************************
+ *   COMPONENT START
+ **********************************************************************************************************/
+/** Invisible pick surface — props only; parent owns selection state. */
+export const BoardSquarePick: BoardSquarePick = ({
+	x,
+	y,
+	position,
+	isTarget,
+	pickActive,
+	onPick,
+}) => {
 	const { config } = useInvariantContext(GameConfigContext);
-	const selectedPiece = useSelector(WorldStateStore, (state) => state.selectedPiece);
-	const canAct = useSelector(WorldStateStore, (state) => canLocalPlayerAct(state));
 
 	const handleClick = (event: { stopPropagation: () => void }) => {
 		event.stopPropagation();
 
-		if (!selectedPiece || !canAct) {
+		if (!pickActive) {
 			return;
 		}
 
-		if (tryMoveSelectedPiece({ x, y })) {
-			return;
-		}
-
-		clearSelectedPiece();
+		onPick({ x, y });
 	};
 
 	return (

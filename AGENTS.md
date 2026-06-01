@@ -26,6 +26,8 @@ Before substantial work:
 
 - **Use `bun x`, not `bunx`:** When running packages via Bun yourself (e.g. `@tanstack/intent`, `oxlint`), use `bun x <package>` instead of `bunx`. `bunx` can hang in this environment. Do not edit the auto-generated TanStack Intent block above just to replace its generated `bunx` text.
 
+- **One component per file:** Each `.tsx` / `.jsx` file exports at most one React component. Extract siblings into their own files (e.g. `BoardTilesLayer/index.tsx`). TanStack route files may still define `Route` plus `component` / `shellComponent` in one file. See `.cursor/rules/one-component-per-file.mdc`.
+
 - **React component shape:** Non-route components with props use `React.FC<{ ... }>` + `export const Name: Name = (...) => { ... }`. Prop-less components use `export const Name = () => { ... }`. Route components (`component` / `shellComponent` on a `Route` export) use `function Name()` defined **after** the route.
 
 - **R3F frame callbacks:** Do not use early returns inside `useFrame`, `useFrameAnimation` `apply` callbacks, or similar per-frame effect paths. Read the game camera via `useGameCamera()` (orthographic invariant at the hook boundary) instead of `useThree((s) => s.camera)` plus `instanceof` checks in frame logic. For `useFrameAnimation`, inline the `apply` callback at the call site when it is under ~50 lines; keep `initial`, `getTarget`, and `step` separate when that reads clearer.
