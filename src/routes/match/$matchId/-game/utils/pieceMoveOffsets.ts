@@ -4,14 +4,14 @@ export type GridOffset = { dx: number; dy: number };
 
 export type GridCoord = { x: number; y: number };
 
-const ORTHOGONAL_DIRECTIONS = [
+export const ORTHOGONAL_DIRECTIONS = [
 	{ dx: 0, dy: 1 },
 	{ dx: 0, dy: -1 },
 	{ dx: 1, dy: 0 },
 	{ dx: -1, dy: 0 },
 ] as const satisfies readonly GridOffset[];
 
-const DIAGONAL_DIRECTIONS = [
+export const DIAGONAL_DIRECTIONS = [
 	{ dx: 1, dy: 1 },
 	{ dx: 1, dy: -1 },
 	{ dx: -1, dy: 1 },
@@ -61,10 +61,6 @@ export function gridCoordKey(coord: GridCoord): string {
 	return `${coord.x},${coord.y}`;
 }
 
-export function getForwardDy(y: number, boardSize: number): 1 | -1 {
-	return y < boardSize / 2 ? 1 : -1;
-}
-
 export function isOnBoard(
 	coord: GridCoord,
 	boardSize: number,
@@ -72,8 +68,4 @@ export function isOnBoard(
 	return (
 		coord.x >= 0 && coord.x < boardSize && coord.y >= 0 && coord.y < boardSize
 	);
-}
-
-export function isPawnStartingRank(y: number, forwardDy: 1 | -1): boolean {
-	return forwardDy === 1 ? y === 1 : y === 8;
 }

@@ -8,7 +8,9 @@ import {
 	ChunkIdContext,
 	DataIdContext,
 } from "#/routes/match/$matchId/-game/store/context.ts";
+import type { TeamId } from "#/routes/match/$matchId/-game/store/consts.ts";
 import { ChunkStore } from "#/routes/match/$matchId/-game/store/store.ts";
+import { WorldStateStore } from "#/routes/match/$matchId/-game/store/worldState/store.ts";
 import { getPredictedMoves } from "#/routes/match/$matchId/-game/utils/getPredictedMoves.ts";
 import { gridCoordKey } from "#/routes/match/$matchId/-game/utils/pieceMoveOffsets.ts";
 
@@ -25,21 +27,27 @@ export const DataRenderer = () => {
 		),
 	);
 
-	const occupiedSquares = useSelector(ChunkStore, (state) => {
+	const removedTiles = useSelector(
+		WorldStateStore,
+		(state) => state.closingZone.removed,
+	);
+
+	const { occupiedSquares, squareTeams } = useSelector(ChunkStore, (state) => {
 		const occupied = new Set<string>();
+		const teams = new Map<string, TeamId>();
 
 		for (const chunk of state.values()) {
 			for (const entry of chunk.data.values()) {
-				occupied.add(
-					gridCoordKey({
-						x: entry.attributes.x,
-						y: entry.attributes.y,
-					}),
-				);
+				const key = gridCoordKey({
+					x: entry.attributes.x,
+					y: entry.attributes.y,
+				});
+				occupied.add(key);
+				teams.set(key, entry.attributes.teamId);
 			}
 		}
 
-		return occupied;
+		return { occupiedSquares: occupied, squareTeams: teams };
 	});
 
 	const predictedMoves = hovered
@@ -47,8 +55,11 @@ export const DataRenderer = () => {
 				piece: data.attributes.piece,
 				x: data.attributes.x,
 				y: data.attributes.y,
+				teamId: data.attributes.teamId,
 				boardSize: config.board.size,
 				occupied: occupiedSquares,
+				squareTeams,
+				removed: removedTiles,
 			})
 		: [];
 

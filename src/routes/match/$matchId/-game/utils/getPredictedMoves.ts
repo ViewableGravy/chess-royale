@@ -1,33 +1,58 @@
-import type { PieceLetter } from "#/routes/match/$matchId/-game/store/consts.ts";
+import type { PieceLetter, TeamId } from "#/routes/match/$matchId/-game/store/consts.ts";
 import {
+	DIAGONAL_DIRECTIONS,
 	type GridCoord,
 	type GridOffset,
-	getForwardDy,
+	ORTHOGONAL_DIRECTIONS,
 	gridCoordKey,
-	isOnBoard,
-	isPawnStartingRank,
 	PIECE_MOVE_PATTERNS,
 } from "#/routes/match/$matchId/-game/utils/pieceMoveOffsets.ts";
+import { isPlayableSquare } from "#/routes/match/$matchId/-game/utils/isPlayableSquare.ts";
 
 type GetPredictedMovesOptions = {
 	piece: PieceLetter;
 	x: number;
 	y: number;
+	teamId: TeamId;
 	boardSize: number;
 	occupied: ReadonlySet<string>;
+	squareTeams: ReadonlyMap<string, TeamId>;
+	removed: ReadonlySet<string>;
 };
+
+function isEnemySquare(
+	key: string,
+	teamId: TeamId,
+	squareTeams: ReadonlyMap<string, TeamId>,
+): boolean {
+	const occupantTeamId = squareTeams.get(key);
+	return occupantTeamId !== undefined && occupantTeamId !== teamId;
+}
 
 function collectStepMoves(
 	origin: GridCoord,
 	offsets: readonly GridOffset[],
 	boardSize: number,
 	occupied: ReadonlySet<string>,
+	removed: ReadonlySet<string>,
+	teamId: TeamId,
+	squareTeams: ReadonlyMap<string, TeamId>,
 ): GridCoord[] {
 	const moves: GridCoord[] = [];
 
 	for (const { dx, dy } of offsets) {
 		const target = { x: origin.x + dx, y: origin.y + dy };
-		if (!isOnBoard(target, boardSize) || occupied.has(gridCoordKey(target))) {
+		const key = gridCoordKey(target);
+
+		if (!isPlayableSquare(target, boardSize, removed)) {
+			continue;
+		}
+
+		if (occupied.has(key)) {
+			if (isEnemySquare(key, teamId, squareTeams)) {
+				moves.push(target);
+			}
+
 			continue;
 		}
 
@@ -42,6 +67,9 @@ function collectRayMoves(
 	directions: readonly GridOffset[],
 	boardSize: number,
 	occupied: ReadonlySet<string>,
+	removed: ReadonlySet<string>,
+	teamId: TeamId,
+	squareTeams: ReadonlyMap<string, TeamId>,
 ): GridCoord[] {
 	const moves: GridCoord[] = [];
 
@@ -50,11 +78,17 @@ function collectRayMoves(
 
 		while (true) {
 			const target = { x: origin.x + dx * step, y: origin.y + dy * step };
-			if (!isOnBoard(target, boardSize)) {
+			const key = gridCoordKey(target);
+
+			if (!isPlayableSquare(target, boardSize, removed)) {
 				break;
 			}
 
-			if (occupied.has(gridCoordKey(target))) {
+			if (occupied.has(key)) {
+				if (isEnemySquare(key, teamId, squareTeams)) {
+					moves.push(target);
+				}
+
 				break;
 			}
 
@@ -70,23 +104,38 @@ function collectPawnMoves(
 	origin: GridCoord,
 	boardSize: number,
 	occupied: ReadonlySet<string>,
+	removed: ReadonlySet<string>,
+	teamId: TeamId,
+	squareTeams: ReadonlyMap<string, TeamId>,
 ): GridCoord[] {
-	const forwardDy = getForwardDy(origin.y, boardSize);
-	const oneStep = { x: origin.x, y: origin.y + forwardDy };
+	const moves: GridCoord[] = [];
 
-	if (!isOnBoard(oneStep, boardSize) || occupied.has(gridCoordKey(oneStep))) {
-		return [];
+	for (const { dx, dy } of ORTHOGONAL_DIRECTIONS) {
+		const target = { x: origin.x + dx, y: origin.y + dy };
+		const key = gridCoordKey(target);
+
+		if (
+			!isPlayableSquare(target, boardSize, removed) ||
+			occupied.has(key)
+		) {
+			continue;
+		}
+
+		moves.push(target);
 	}
 
-	const moves: GridCoord[] = [oneStep];
+	for (const { dx, dy } of DIAGONAL_DIRECTIONS) {
+		const target = { x: origin.x + dx, y: origin.y + dy };
+		const key = gridCoordKey(target);
 
-	if (!isPawnStartingRank(origin.y, forwardDy)) {
-		return moves;
-	}
+		if (
+			!isPlayableSquare(target, boardSize, removed) ||
+			!isEnemySquare(key, teamId, squareTeams)
+		) {
+			continue;
+		}
 
-	const twoStep = { x: origin.x, y: origin.y + forwardDy * 2 };
-	if (isOnBoard(twoStep, boardSize) && !occupied.has(gridCoordKey(twoStep))) {
-		moves.push(twoStep);
+		moves.push(target);
 	}
 
 	return moves;
@@ -96,8 +145,11 @@ export function getPredictedMoves({
 	piece,
 	x,
 	y,
+	teamId,
 	boardSize,
 	occupied,
+	squareTeams,
+	removed,
 }: GetPredictedMovesOptions): GridCoord[] {
 	const origin = { x, y };
 	const pattern = PIECE_MOVE_PATTERNS[piece];
@@ -109,6 +161,9 @@ export function getPredictedMoves({
 				pattern.offsets,
 				boardSize,
 				occupied,
+				removed,
+				teamId,
+				squareTeams,
 			);
 		case "rays":
 			return collectRayMoves(
@@ -116,8 +171,18 @@ export function getPredictedMoves({
 				pattern.directions,
 				boardSize,
 				occupied,
+				removed,
+				teamId,
+				squareTeams,
 			);
 		case "pawn":
-			return collectPawnMoves(origin, boardSize, occupied);
+			return collectPawnMoves(
+				origin,
+				boardSize,
+				occupied,
+				removed,
+				teamId,
+				squareTeams,
+			);
 	}
 }

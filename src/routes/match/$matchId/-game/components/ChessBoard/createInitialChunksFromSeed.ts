@@ -5,10 +5,12 @@ import {
 	type Chunks,
 	type Data,
 	type DataId,
-	createChunkId,
-	createDataId,
 	PIECE_LETTERS,
 } from "#/routes/match/$matchId/-game/store/consts.ts";
+import { createChunkId } from "#/routes/match/$matchId/-game/store/createChunkId.ts";
+import { createDataId } from "#/routes/match/$matchId/-game/store/createDataId.ts";
+import { createTeamId } from "#/routes/match/$matchId/-game/store/createTeamId.ts";
+import { withTeamAttributes } from "#/routes/match/$matchId/-game/store/withTeamAttributes.ts";
 
 const chunkIdSchema = z.string().transform(createChunkId);
 const dataIdSchema = z.string().transform(createDataId);
@@ -19,10 +21,14 @@ const dataSchema = z.object({
 	attributes: z.object({
 		x: z.number(),
 		y: z.number(),
+		teamId: z.string().transform(createTeamId),
 		color: z.string(),
 		piece: z.enum(PIECE_LETTERS),
 	}),
-});
+}).transform((entry) => ({
+	...entry,
+	attributes: withTeamAttributes(entry.attributes),
+}));
 
 const recordToMap = <K, V>(record: Record<string, V>, createKey: (key: string) => K) =>
 	new Map(Object.entries(record).map(([key, value]) => [createKey(key), value]));

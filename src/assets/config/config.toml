@@ -1,5 +1,5 @@
 [board]
-size = 10
+size = 20
 squareSize = 1
 lightSquareColor = "#f0d9b5"
 darkSquareColor = "#b58863"
@@ -12,7 +12,7 @@ moveHighlightColor = "#4ade80"
 labelFontSize = 0.28
 
 [camera]
-position = [0, 0, 14]
+position = [0, 0, 28]
 fov = 50
 
 [canvas]

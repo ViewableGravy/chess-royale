@@ -1,164 +1,708 @@
 {
 	"board-pieces": {
-		"white-r-1": {
-			"id": "white-r-1",
+		"south-r-1": {
+			"id": "south-r-1",
 			"chunkId": "board-pieces",
-			"attributes": { "x": 1, "y": 0, "color": "#e2e8f0", "piece": "R" }
+			"attributes": {
+				"x": 6,
+				"y": 0,
+				"color": "#e2e8f0",
+				"piece": "R",
+				"teamId": "south"
+			}
 		},
-		"white-n-1": {
-			"id": "white-n-1",
+		"south-n-1": {
+			"id": "south-n-1",
 			"chunkId": "board-pieces",
-			"attributes": { "x": 2, "y": 0, "color": "#e2e8f0", "piece": "N" }
+			"attributes": {
+				"x": 7,
+				"y": 0,
+				"color": "#e2e8f0",
+				"piece": "N",
+				"teamId": "south"
+			}
 		},
-		"white-b-1": {
-			"id": "white-b-1",
+		"south-b-1": {
+			"id": "south-b-1",
 			"chunkId": "board-pieces",
-			"attributes": { "x": 3, "y": 0, "color": "#e2e8f0", "piece": "B" }
+			"attributes": {
+				"x": 8,
+				"y": 0,
+				"color": "#e2e8f0",
+				"piece": "B",
+				"teamId": "south"
+			}
 		},
-		"white-q": {
-			"id": "white-q",
+		"south-q": {
+			"id": "south-q",
 			"chunkId": "board-pieces",
-			"attributes": { "x": 4, "y": 0, "color": "#e2e8f0", "piece": "Q" }
+			"attributes": {
+				"x": 9,
+				"y": 0,
+				"color": "#e2e8f0",
+				"piece": "Q",
+				"teamId": "south"
+			}
 		},
-		"white-k": {
-			"id": "white-k",
+		"south-k": {
+			"id": "south-k",
 			"chunkId": "board-pieces",
-			"attributes": { "x": 5, "y": 0, "color": "#e2e8f0", "piece": "K" }
+			"attributes": {
+				"x": 10,
+				"y": 0,
+				"color": "#e2e8f0",
+				"piece": "K",
+				"teamId": "south"
+			}
 		},
-		"white-b-2": {
-			"id": "white-b-2",
+		"south-b-2": {
+			"id": "south-b-2",
 			"chunkId": "board-pieces",
-			"attributes": { "x": 6, "y": 0, "color": "#e2e8f0", "piece": "B" }
+			"attributes": {
+				"x": 11,
+				"y": 0,
+				"color": "#e2e8f0",
+				"piece": "B",
+				"teamId": "south"
+			}
 		},
-		"white-n-2": {
-			"id": "white-n-2",
+		"south-n-2": {
+			"id": "south-n-2",
 			"chunkId": "board-pieces",
-			"attributes": { "x": 7, "y": 0, "color": "#e2e8f0", "piece": "N" }
+			"attributes": {
+				"x": 12,
+				"y": 0,
+				"color": "#e2e8f0",
+				"piece": "N",
+				"teamId": "south"
+			}
 		},
-		"white-r-2": {
-			"id": "white-r-2",
+		"south-r-2": {
+			"id": "south-r-2",
 			"chunkId": "board-pieces",
-			"attributes": { "x": 8, "y": 0, "color": "#e2e8f0", "piece": "R" }
+			"attributes": {
+				"x": 13,
+				"y": 0,
+				"color": "#e2e8f0",
+				"piece": "R",
+				"teamId": "south"
+			}
 		},
-		"white-p-1": {
-			"id": "white-p-1",
+		"south-p-1": {
+			"id": "south-p-1",
 			"chunkId": "board-pieces",
-			"attributes": { "x": 1, "y": 1, "color": "#cbd5e1", "piece": "P" }
+			"attributes": {
+				"x": 6,
+				"y": 1,
+				"color": "#e2e8f0",
+				"piece": "P",
+				"teamId": "south"
+			}
 		},
-		"white-p-2": {
-			"id": "white-p-2",
+		"south-p-2": {
+			"id": "south-p-2",
 			"chunkId": "board-pieces",
-			"attributes": { "x": 2, "y": 1, "color": "#cbd5e1", "piece": "P" }
+			"attributes": {
+				"x": 7,
+				"y": 1,
+				"color": "#e2e8f0",
+				"piece": "P",
+				"teamId": "south"
+			}
 		},
-		"white-p-3": {
-			"id": "white-p-3",
+		"south-p-3": {
+			"id": "south-p-3",
 			"chunkId": "board-pieces",
-			"attributes": { "x": 3, "y": 1, "color": "#cbd5e1", "piece": "P" }
+			"attributes": {
+				"x": 8,
+				"y": 1,
+				"color": "#e2e8f0",
+				"piece": "P",
+				"teamId": "south"
+			}
 		},
-		"white-p-4": {
-			"id": "white-p-4",
+		"south-p-4": {
+			"id": "south-p-4",
 			"chunkId": "board-pieces",
-			"attributes": { "x": 4, "y": 1, "color": "#cbd5e1", "piece": "P" }
+			"attributes": {
+				"x": 9,
+				"y": 1,
+				"color": "#e2e8f0",
+				"piece": "P",
+				"teamId": "south"
+			}
 		},
-		"white-p-5": {
-			"id": "white-p-5",
+		"south-p-5": {
+			"id": "south-p-5",
 			"chunkId": "board-pieces",
-			"attributes": { "x": 5, "y": 1, "color": "#cbd5e1", "piece": "P" }
+			"attributes": {
+				"x": 10,
+				"y": 1,
+				"color": "#e2e8f0",
+				"piece": "P",
+				"teamId": "south"
+			}
 		},
-		"white-p-6": {
-			"id": "white-p-6",
+		"south-p-6": {
+			"id": "south-p-6",
 			"chunkId": "board-pieces",
-			"attributes": { "x": 6, "y": 1, "color": "#cbd5e1", "piece": "P" }
+			"attributes": {
+				"x": 11,
+				"y": 1,
+				"color": "#e2e8f0",
+				"piece": "P",
+				"teamId": "south"
+			}
 		},
-		"white-p-7": {
-			"id": "white-p-7",
+		"south-p-7": {
+			"id": "south-p-7",
 			"chunkId": "board-pieces",
-			"attributes": { "x": 7, "y": 1, "color": "#cbd5e1", "piece": "P" }
+			"attributes": {
+				"x": 12,
+				"y": 1,
+				"color": "#e2e8f0",
+				"piece": "P",
+				"teamId": "south"
+			}
 		},
-		"white-p-8": {
-			"id": "white-p-8",
+		"south-p-8": {
+			"id": "south-p-8",
 			"chunkId": "board-pieces",
-			"attributes": { "x": 8, "y": 1, "color": "#cbd5e1", "piece": "P" }
+			"attributes": {
+				"x": 13,
+				"y": 1,
+				"color": "#e2e8f0",
+				"piece": "P",
+				"teamId": "south"
+			}
 		},
-		"black-p-1": {
-			"id": "black-p-1",
+		"north-r-1": {
+			"id": "north-r-1",
 			"chunkId": "board-pieces",
-			"attributes": { "x": 1, "y": 8, "color": "#475569", "piece": "P" }
+			"attributes": {
+				"x": 6,
+				"y": 19,
+				"color": "#1e293b",
+				"piece": "R",
+				"teamId": "north"
+			}
 		},
-		"black-p-2": {
-			"id": "black-p-2",
+		"north-n-1": {
+			"id": "north-n-1",
 			"chunkId": "board-pieces",
-			"attributes": { "x": 2, "y": 8, "color": "#475569", "piece": "P" }
+			"attributes": {
+				"x": 7,
+				"y": 19,
+				"color": "#1e293b",
+				"piece": "N",
+				"teamId": "north"
+			}
 		},
-		"black-p-3": {
-			"id": "black-p-3",
+		"north-b-1": {
+			"id": "north-b-1",
 			"chunkId": "board-pieces",
-			"attributes": { "x": 3, "y": 8, "color": "#475569", "piece": "P" }
+			"attributes": {
+				"x": 8,
+				"y": 19,
+				"color": "#1e293b",
+				"piece": "B",
+				"teamId": "north"
+			}
 		},
-		"black-p-4": {
-			"id": "black-p-4",
+		"north-q": {
+			"id": "north-q",
 			"chunkId": "board-pieces",
-			"attributes": { "x": 4, "y": 8, "color": "#475569", "piece": "P" }
+			"attributes": {
+				"x": 9,
+				"y": 19,
+				"color": "#1e293b",
+				"piece": "Q",
+				"teamId": "north"
+			}
 		},
-		"black-p-5": {
-			"id": "black-p-5",
+		"north-k": {
+			"id": "north-k",
 			"chunkId": "board-pieces",
-			"attributes": { "x": 5, "y": 8, "color": "#475569", "piece": "P" }
+			"attributes": {
+				"x": 10,
+				"y": 19,
+				"color": "#1e293b",
+				"piece": "K",
+				"teamId": "north"
+			}
 		},
-		"black-p-6": {
-			"id": "black-p-6",
+		"north-b-2": {
+			"id": "north-b-2",
 			"chunkId": "board-pieces",
-			"attributes": { "x": 6, "y": 8, "color": "#475569", "piece": "P" }
+			"attributes": {
+				"x": 11,
+				"y": 19,
+				"color": "#1e293b",
+				"piece": "B",
+				"teamId": "north"
+			}
 		},
-		"black-p-7": {
-			"id": "black-p-7",
+		"north-n-2": {
+			"id": "north-n-2",
 			"chunkId": "board-pieces",
-			"attributes": { "x": 7, "y": 8, "color": "#475569", "piece": "P" }
+			"attributes": {
+				"x": 12,
+				"y": 19,
+				"color": "#1e293b",
+				"piece": "N",
+				"teamId": "north"
+			}
 		},
-		"black-p-8": {
-			"id": "black-p-8",
+		"north-r-2": {
+			"id": "north-r-2",
 			"chunkId": "board-pieces",
-			"attributes": { "x": 8, "y": 8, "color": "#475569", "piece": "P" }
+			"attributes": {
+				"x": 13,
+				"y": 19,
+				"color": "#1e293b",
+				"piece": "R",
+				"teamId": "north"
+			}
 		},
-		"black-r-1": {
-			"id": "black-r-1",
+		"north-p-1": {
+			"id": "north-p-1",
 			"chunkId": "board-pieces",
-			"attributes": { "x": 1, "y": 9, "color": "#1e293b", "piece": "R" }
+			"attributes": {
+				"x": 6,
+				"y": 18,
+				"color": "#1e293b",
+				"piece": "P",
+				"teamId": "north"
+			}
 		},
-		"black-n-1": {
-			"id": "black-n-1",
+		"north-p-2": {
+			"id": "north-p-2",
 			"chunkId": "board-pieces",
-			"attributes": { "x": 2, "y": 9, "color": "#1e293b", "piece": "N" }
+			"attributes": {
+				"x": 7,
+				"y": 18,
+				"color": "#1e293b",
+				"piece": "P",
+				"teamId": "north"
+			}
 		},
-		"black-b-1": {
-			"id": "black-b-1",
+		"north-p-3": {
+			"id": "north-p-3",
 			"chunkId": "board-pieces",
-			"attributes": { "x": 3, "y": 9, "color": "#1e293b", "piece": "B" }
+			"attributes": {
+				"x": 8,
+				"y": 18,
+				"color": "#1e293b",
+				"piece": "P",
+				"teamId": "north"
+			}
 		},
-		"black-q": {
-			"id": "black-q",
+		"north-p-4": {
+			"id": "north-p-4",
 			"chunkId": "board-pieces",
-			"attributes": { "x": 4, "y": 9, "color": "#1e293b", "piece": "Q" }
+			"attributes": {
+				"x": 9,
+				"y": 18,
+				"color": "#1e293b",
+				"piece": "P",
+				"teamId": "north"
+			}
 		},
-		"black-k": {
-			"id": "black-k",
+		"north-p-5": {
+			"id": "north-p-5",
 			"chunkId": "board-pieces",
-			"attributes": { "x": 5, "y": 9, "color": "#1e293b", "piece": "K" }
+			"attributes": {
+				"x": 10,
+				"y": 18,
+				"color": "#1e293b",
+				"piece": "P",
+				"teamId": "north"
+			}
 		},
-		"black-b-2": {
-			"id": "black-b-2",
+		"north-p-6": {
+			"id": "north-p-6",
 			"chunkId": "board-pieces",
-			"attributes": { "x": 6, "y": 9, "color": "#1e293b", "piece": "B" }
+			"attributes": {
+				"x": 11,
+				"y": 18,
+				"color": "#1e293b",
+				"piece": "P",
+				"teamId": "north"
+			}
 		},
-		"black-n-2": {
-			"id": "black-n-2",
+		"north-p-7": {
+			"id": "north-p-7",
 			"chunkId": "board-pieces",
-			"attributes": { "x": 7, "y": 9, "color": "#1e293b", "piece": "N" }
+			"attributes": {
+				"x": 12,
+				"y": 18,
+				"color": "#1e293b",
+				"piece": "P",
+				"teamId": "north"
+			}
 		},
-		"black-r-2": {
-			"id": "black-r-2",
+		"north-p-8": {
+			"id": "north-p-8",
 			"chunkId": "board-pieces",
-			"attributes": { "x": 8, "y": 9, "color": "#1e293b", "piece": "R" }
+			"attributes": {
+				"x": 13,
+				"y": 18,
+				"color": "#1e293b",
+				"piece": "P",
+				"teamId": "north"
+			}
+		},
+		"west-r-1": {
+			"id": "west-r-1",
+			"chunkId": "board-pieces",
+			"attributes": {
+				"x": 0,
+				"y": 6,
+				"color": "#fecaca",
+				"piece": "R",
+				"teamId": "west"
+			}
+		},
+		"west-n-1": {
+			"id": "west-n-1",
+			"chunkId": "board-pieces",
+			"attributes": {
+				"x": 0,
+				"y": 7,
+				"color": "#fecaca",
+				"piece": "N",
+				"teamId": "west"
+			}
+		},
+		"west-b-1": {
+			"id": "west-b-1",
+			"chunkId": "board-pieces",
+			"attributes": {
+				"x": 0,
+				"y": 8,
+				"color": "#fecaca",
+				"piece": "B",
+				"teamId": "west"
+			}
+		},
+		"west-q": {
+			"id": "west-q",
+			"chunkId": "board-pieces",
+			"attributes": {
+				"x": 0,
+				"y": 9,
+				"color": "#fecaca",
+				"piece": "Q",
+				"teamId": "west"
+			}
+		},
+		"west-k": {
+			"id": "west-k",
+			"chunkId": "board-pieces",
+			"attributes": {
+				"x": 0,
+				"y": 10,
+				"color": "#fecaca",
+				"piece": "K",
+				"teamId": "west"
+			}
+		},
+		"west-b-2": {
+			"id": "west-b-2",
+			"chunkId": "board-pieces",
+			"attributes": {
+				"x": 0,
+				"y": 11,
+				"color": "#fecaca",
+				"piece": "B",
+				"teamId": "west"
+			}
+		},
+		"west-n-2": {
+			"id": "west-n-2",
+			"chunkId": "board-pieces",
+			"attributes": {
+				"x": 0,
+				"y": 12,
+				"color": "#fecaca",
+				"piece": "N",
+				"teamId": "west"
+			}
+		},
+		"west-r-2": {
+			"id": "west-r-2",
+			"chunkId": "board-pieces",
+			"attributes": {
+				"x": 0,
+				"y": 13,
+				"color": "#fecaca",
+				"piece": "R",
+				"teamId": "west"
+			}
+		},
+		"west-p-1": {
+			"id": "west-p-1",
+			"chunkId": "board-pieces",
+			"attributes": {
+				"x": 1,
+				"y": 6,
+				"color": "#fecaca",
+				"piece": "P",
+				"teamId": "west"
+			}
+		},
+		"west-p-2": {
+			"id": "west-p-2",
+			"chunkId": "board-pieces",
+			"attributes": {
+				"x": 1,
+				"y": 7,
+				"color": "#fecaca",
+				"piece": "P",
+				"teamId": "west"
+			}
+		},
+		"west-p-3": {
+			"id": "west-p-3",
+			"chunkId": "board-pieces",
+			"attributes": {
+				"x": 1,
+				"y": 8,
+				"color": "#fecaca",
+				"piece": "P",
+				"teamId": "west"
+			}
+		},
+		"west-p-4": {
+			"id": "west-p-4",
+			"chunkId": "board-pieces",
+			"attributes": {
+				"x": 1,
+				"y": 9,
+				"color": "#fecaca",
+				"piece": "P",
+				"teamId": "west"
+			}
+		},
+		"west-p-5": {
+			"id": "west-p-5",
+			"chunkId": "board-pieces",
+			"attributes": {
+				"x": 1,
+				"y": 10,
+				"color": "#fecaca",
+				"piece": "P",
+				"teamId": "west"
+			}
+		},
+		"west-p-6": {
+			"id": "west-p-6",
+			"chunkId": "board-pieces",
+			"attributes": {
+				"x": 1,
+				"y": 11,
+				"color": "#fecaca",
+				"piece": "P",
+				"teamId": "west"
+			}
+		},
+		"west-p-7": {
+			"id": "west-p-7",
+			"chunkId": "board-pieces",
+			"attributes": {
+				"x": 1,
+				"y": 12,
+				"color": "#fecaca",
+				"piece": "P",
+				"teamId": "west"
+			}
+		},
+		"west-p-8": {
+			"id": "west-p-8",
+			"chunkId": "board-pieces",
+			"attributes": {
+				"x": 1,
+				"y": 13,
+				"color": "#fecaca",
+				"piece": "P",
+				"teamId": "west"
+			}
+		},
+		"east-r-1": {
+			"id": "east-r-1",
+			"chunkId": "board-pieces",
+			"attributes": {
+				"x": 19,
+				"y": 6,
+				"color": "#bfdbfe",
+				"piece": "R",
+				"teamId": "east"
+			}
+		},
+		"east-n-1": {
+			"id": "east-n-1",
+			"chunkId": "board-pieces",
+			"attributes": {
+				"x": 19,
+				"y": 7,
+				"color": "#bfdbfe",
+				"piece": "N",
+				"teamId": "east"
+			}
+		},
+		"east-b-1": {
+			"id": "east-b-1",
+			"chunkId": "board-pieces",
+			"attributes": {
+				"x": 19,
+				"y": 8,
+				"color": "#bfdbfe",
+				"piece": "B",
+				"teamId": "east"
+			}
+		},
+		"east-q": {
+			"id": "east-q",
+			"chunkId": "board-pieces",
+			"attributes": {
+				"x": 19,
+				"y": 9,
+				"color": "#bfdbfe",
+				"piece": "Q",
+				"teamId": "east"
+			}
+		},
+		"east-k": {
+			"id": "east-k",
+			"chunkId": "board-pieces",
+			"attributes": {
+				"x": 19,
+				"y": 10,
+				"color": "#bfdbfe",
+				"piece": "K",
+				"teamId": "east"
+			}
+		},
+		"east-b-2": {
+			"id": "east-b-2",
+			"chunkId": "board-pieces",
+			"attributes": {
+				"x": 19,
+				"y": 11,
+				"color": "#bfdbfe",
+				"piece": "B",
+				"teamId": "east"
+			}
+		},
+		"east-n-2": {
+			"id": "east-n-2",
+			"chunkId": "board-pieces",
+			"attributes": {
+				"x": 19,
+				"y": 12,
+				"color": "#bfdbfe",
+				"piece": "N",
+				"teamId": "east"
+			}
+		},
+		"east-r-2": {
+			"id": "east-r-2",
+			"chunkId": "board-pieces",
+			"attributes": {
+				"x": 19,
+				"y": 13,
+				"color": "#bfdbfe",
+				"piece": "R",
+				"teamId": "east"
+			}
+		},
+		"east-p-1": {
+			"id": "east-p-1",
+			"chunkId": "board-pieces",
+			"attributes": {
+				"x": 18,
+				"y": 6,
+				"color": "#bfdbfe",
+				"piece": "P",
+				"teamId": "east"
+			}
+		},
+		"east-p-2": {
+			"id": "east-p-2",
+			"chunkId": "board-pieces",
+			"attributes": {
+				"x": 18,
+				"y": 7,
+				"color": "#bfdbfe",
+				"piece": "P",
+				"teamId": "east"
+			}
+		},
+		"east-p-3": {
+			"id": "east-p-3",
+			"chunkId": "board-pieces",
+			"attributes": {
+				"x": 18,
+				"y": 8,
+				"color": "#bfdbfe",
+				"piece": "P",
+				"teamId": "east"
+			}
+		},
+		"east-p-4": {
+			"id": "east-p-4",
+			"chunkId": "board-pieces",
+			"attributes": {
+				"x": 18,
+				"y": 9,
+				"color": "#bfdbfe",
+				"piece": "P",
+				"teamId": "east"
+			}
+		},
+		"east-p-5": {
+			"id": "east-p-5",
+			"chunkId": "board-pieces",
+			"attributes": {
+				"x": 18,
+				"y": 10,
+				"color": "#bfdbfe",
+				"piece": "P",
+				"teamId": "east"
+			}
+		},
+		"east-p-6": {
+			"id": "east-p-6",
+			"chunkId": "board-pieces",
+			"attributes": {
+				"x": 18,
+				"y": 11,
+				"color": "#bfdbfe",
+				"piece": "P",
+				"teamId": "east"
+			}
+		},
+		"east-p-7": {
+			"id": "east-p-7",
+			"chunkId": "board-pieces",
+			"attributes": {
+				"x": 18,
+				"y": 12,
+				"color": "#bfdbfe",
+				"piece": "P",
+				"teamId": "east"
+			}
+		},
+		"east-p-8": {
+			"id": "east-p-8",
+			"chunkId": "board-pieces",
+			"attributes": {
+				"x": 18,
+				"y": 13,
+				"color": "#bfdbfe",
+				"piece": "P",
+				"teamId": "east"
+			}
 		}
 	}
 }

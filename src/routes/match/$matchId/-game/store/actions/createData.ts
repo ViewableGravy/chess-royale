@@ -1,17 +1,24 @@
 import type {
+	Attributes,
 	Chunk,
 	ChunkId,
 	Data,
 } from "#/routes/match/$matchId/-game/store/consts.ts";
-import {
-	createChunkId,
-	createDataId,
-} from "#/routes/match/$matchId/-game/store/consts.ts";
+import { createChunkId } from "#/routes/match/$matchId/-game/store/createChunkId.ts";
+import { createDataId } from "#/routes/match/$matchId/-game/store/createDataId.ts";
 import type { ChunkStoreApi } from "#/routes/match/$matchId/-game/store/store.ts";
+import { withTeamAttributes } from "#/routes/match/$matchId/-game/store/withTeamAttributes.ts";
 import { createId } from "#/utils/functions/createId";
 import invariant from "tiny-invariant";
 
-export type CreateDataInput = Omit<Data, "id" | "chunkId"> | Omit<Data, "id">;
+export type CreateDataAttributesInput = Pick<
+	Attributes,
+	"x" | "y" | "piece" | "teamId"
+>;
+
+export type CreateDataInput =
+	| { attributes: CreateDataAttributesInput }
+	| { attributes: CreateDataAttributesInput; chunkId: ChunkId };
 
 export function createCreateData({ get, setState }: ChunkStoreApi) {
 	return (data: CreateDataInput, chunkIdHint?: ChunkId) => {
@@ -32,7 +39,7 @@ export function createCreateData({ get, setState }: ChunkStoreApi) {
 				const newData: Data = {
 					id: dataId,
 					chunkId: preferredChunk,
-					attributes: data.attributes,
+					attributes: withTeamAttributes(data.attributes),
 				};
 
 				setState((prev) => {
@@ -74,7 +81,7 @@ export function createCreateData({ get, setState }: ChunkStoreApi) {
 		const newData: Data = {
 			id: dataId,
 			chunkId: finalTargetChunkId,
-			attributes: data.attributes,
+			attributes: withTeamAttributes(data.attributes),
 		};
 
 		setState((prev) => {
