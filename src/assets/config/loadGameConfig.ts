@@ -42,6 +42,12 @@ const gameConfigSchema = z.object({
 
 export type GameConfig = z.infer<typeof gameConfigSchema>;
 
+let cachedGameConfig: GameConfig | undefined;
+
 export function loadGameConfig(): GameConfig {
-	return gameConfigSchema.parse(parse(configSource));
+	if (cachedGameConfig === undefined) {
+		cachedGameConfig = gameConfigSchema.parse(parse(configSource));
+	}
+
+	return cachedGameConfig;
 }

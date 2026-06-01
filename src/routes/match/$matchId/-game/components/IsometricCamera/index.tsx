@@ -9,6 +9,7 @@ import { useGameCamera } from "#/routes/match/$matchId/-game/hooks/useGameCamera
 import { WorldStateStore } from "#/routes/match/$matchId/-game/store/worldState/store.ts";
 import { useThree } from "@react-three/fiber";
 import { useSelector } from "@tanstack/react-store";
+import type { OrbitControls as OrbitControlsImpl } from "three-stdlib";
 
 /**
  * Configures the Canvas orthographic camera (world-space frustum + isometric angle).
@@ -23,6 +24,7 @@ export const IsometricCamera = () => {
 	const { config } = useInvariantContext(GameConfigContext);
 	const camera = useGameCamera();
 	const size = useThree((state) => state.size);
+	const controls = useThree((state) => state.controls as OrbitControlsImpl | undefined);
 	const localPlayerTeamId = useSelector(WorldStateStore, (state) => state.localPlayerTeamId);
 	const aspect = size.width / size.height || 1;
 
@@ -30,7 +32,11 @@ export const IsometricCamera = () => {
 		camera.manual = true;
 
 		const frustumHalfExtent = getIsometricFrustumHalfExtent(config);
-		const [x, y, z] = getIsometricCameraPosition(boardViewYaw, config.camera.distance);
+		const [baseX, baseY, baseZ] = getIsometricCameraPosition(
+			boardViewYaw,
+			config.camera.distance,
+		);
+		const target = controls?.target;
 
 		camera.left = -frustumHalfExtent * aspect;
 		camera.right = frustumHalfExtent * aspect;
@@ -38,8 +44,15 @@ export const IsometricCamera = () => {
 		camera.bottom = -frustumHalfExtent;
 		camera.near = config.camera.near;
 		camera.far = config.camera.far;
-		camera.position.set(x, y, z);
-		camera.lookAt(0, 0, 0);
+
+		if (target) {
+			camera.position.set(baseX + target.x, baseY + target.y, baseZ + target.z);
+			camera.lookAt(target);
+		} else {
+			camera.position.set(baseX, baseY, baseZ);
+			camera.lookAt(0, 0, 0);
+		}
+
 		camera.updateProjectionMatrix();
 	};
 

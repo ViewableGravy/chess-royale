@@ -30,7 +30,6 @@ function getViewportCanvasSize(): CanvasSize {
 export const GameFiberNode = () => {
 	const { config } = useInvariantContext(GameConfigContext);
 	const chunkIds = useSelector(ChunkStore, (state) => Array.from(state.keys()));
-	const selectedPiece = useSelector(WorldStateStore, (state) => state.selectedPiece);
 	const localPlayerTeamId = useSelector(WorldStateStore, (state) => state.localPlayerTeamId);
 	const [canvasSize, setCanvasSize] = useState<CanvasSize>(() =>
 		typeof window === "undefined" ? { width: 0, height: 0 } : getViewportCanvasSize(),
@@ -58,8 +57,6 @@ export const GameFiberNode = () => {
 		};
 	};
 
-	const canPanCamera = selectedPiece === null;
-
 	return (
 		<ClientOnly>
 			<div ref={gameCanvasContainerRef} className="game-fiber-canvas">
@@ -83,7 +80,7 @@ export const GameFiberNode = () => {
 					<OrbitControls
 						key={localPlayerTeamId}
 						enableRotate={false}
-						enablePan={canPanCamera}
+						enablePan
 						enableZoom
 						target={[0, 0, 0]}
 						mouseButtons={{
