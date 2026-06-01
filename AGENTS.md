@@ -27,3 +27,5 @@ Before substantial work:
 - **Use `bun x`, not `bunx`:** When running packages via Bun yourself (e.g. `@tanstack/intent`, `oxlint`), use `bun x <package>` instead of `bunx`. `bunx` can hang in this environment. Do not edit the auto-generated TanStack Intent block above just to replace its generated `bunx` text.
 
 - **React component shape:** Non-route components with props use `React.FC<{ ... }>` + `export const Name: Name = (...) => { ... }`. Prop-less components use `export const Name = () => { ... }`. Route components (`component` / `shellComponent` on a `Route` export) use `function Name()` defined **after** the route.
+
+- **R3F frame callbacks:** Do not use early returns inside `useFrame`, `useFrameAnimation` `apply` callbacks, or similar per-frame effect paths. Read the game camera via `useGameCamera()` (orthographic invariant at the hook boundary) instead of `useThree((s) => s.camera)` plus `instanceof` checks in frame logic.

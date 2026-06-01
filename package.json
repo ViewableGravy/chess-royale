@@ -1,19 +1,4 @@
 {
-	"name": "chess-royale",
-	"private": true,
-	"type": "module",
-	"imports": {
-		"#/*": "./src/*"
-	},
-	"scripts": {
-		"build": "vite build",
-		"check": "oxlint . && oxfmt --check .",
-		"dev": "vite dev --port 3000",
-		"format": "oxfmt --write .",
-		"lint": "oxlint .",
-		"preview": "vite preview",
-		"test": "vitest run"
-	},
 	"dependencies": {
 		"@modelcontextprotocol/sdk": "^1.27.1",
 		"@react-three/drei": "^10.7.7",
@@ -57,11 +42,27 @@
 		"vite": "^8.0.0",
 		"vitest": "^4.1.5"
 	},
+	"imports": {
+		"#/*": "./src/*"
+	},
+	"name": "chess-royale",
 	"packageManager": "bun@1.2.18",
 	"pnpm": {
 		"onlyBuiltDependencies": [
 			"esbuild",
 			"lightningcss"
 		]
-	}
+	},
+	"private": true,
+	"scripts": {
+		"build": "vite build",
+		"check": "oxlint . && oxfmt --check .",
+		"dev": "vite dev --port 3000",
+		"format": "oxfmt --write .",
+		"lint": "oxlint .",
+		"lint:fix": "oxlint --fix .",
+		"preview": "vite preview",
+		"test": "vitest run"
+	},
+	"type": "module"
 }

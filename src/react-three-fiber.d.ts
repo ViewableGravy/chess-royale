@@ -1,8 +1,8 @@
-import type { ThreeElements } from "@react-three/fiber";
+export {};
 
 declare module "react" {
 	namespace JSX {
-		interface IntrinsicElements extends ThreeElements {}
+		interface IntrinsicElements extends import("@react-three/fiber").ThreeElements {}
 	}
 }
 

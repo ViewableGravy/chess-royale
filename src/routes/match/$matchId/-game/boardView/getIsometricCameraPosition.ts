@@ -1,16 +1,15 @@
-import type { TeamId } from "#/routes/match/$matchId/-game/store/consts.ts";
-import { getBoardViewYaw } from "#/routes/match/$matchId/-game/boardView/getBoardViewYaw.ts";
+
+/**********************************************************************************************************
+ *   TYPE DEFINITIONS
+ **********************************************************************************************************/
+type Vec3Tuple = [number, number, number];
 
 /** Equal X/Z offset at fixed elevation — classic isometric on an XZ floor (Y-up). */
-export function getIsometricCameraPosition(
-	teamId: TeamId,
-	distance: number,
-): [number, number, number] {
-	const yaw = getBoardViewYaw(teamId);
+export function getIsometricCameraPosition(boardViewYaw: number, distance: number): Vec3Tuple {
 	const baseX = distance;
 	const baseZ = distance;
-	const x = baseX * Math.cos(yaw) - baseZ * Math.sin(yaw);
-	const z = baseX * Math.sin(yaw) + baseZ * Math.cos(yaw);
+	const x = baseX * Math.cos(boardViewYaw) - baseZ * Math.sin(boardViewYaw);
+	const z = baseX * Math.sin(boardViewYaw) + baseZ * Math.cos(boardViewYaw);
 
 	return [x, distance, z];
 }
